@@ -1,3 +1,5 @@
+#134.209.23.129
+
 
 drop database if exists pausalni_obrt;
 create database pausalni_obrt default character set utf8;
