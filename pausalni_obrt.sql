@@ -90,4 +90,5 @@ INSERT INTO pausalni_obrt.racun
 (broj_racuna, klijent_kupac_id, vrijeme_idavanja,izdao_korisnik_id)
 VALUES('02-2018', 3, '2018-08-11 15:00:00',1),('03-2018', 2, '2018-12-11 15:33:00',1),('01-2019', 1, '2019-01-11 15:33:00',1);
 
+insert into pausalni_obrt.stavka(usluga_proizvod_id,racun_id,kolicina) values(1,1,1),(2,1,1),(2,2,2);
 
