@@ -73,23 +73,18 @@ alter table racun add foreign key (izdao_korisnik_id) references korisnik(id);
 
 INSERT INTO pausalni_obrt.klijent_kupac
 (naziv)
-VALUES('Fizička osoba'),('Edunova'),('Coca-cola');
+VALUES('Fizička osoba'),('Edunova'),('Coca-cola'),('Tisak'),('NTL d.o.o.');
 
 INSERT INTO pausalni_obrt.korisnik
 (ime, prezime, email, lozinka)
 VALUES('Mirza', 'Delagic', 'mirza@email.com', '123');
 
 INSERT INTO pausalni_obrt.usluga_proizvod(naziv, opis, jedinica_mjere, cijena) VALUES
-('Instalacija', 'postavljanje sustava', 'sat', 250),('Savjetovanje', 'savjetovanje', 'sat', 250);
+('Instalacija', 'postavljanje sustava', 'sat', 250),('Savjetovanje', 'savjetovanje', 'sat', 250),('Nešto','nešto nešto','metar',12.12);
 
 INSERT INTO pausalni_obrt.racun
 (broj_racuna, klijent_kupac_id, vrijeme_idavanja,izdao_korisnik_id)
-VALUES('01-2018', 1, '2018-05-11 00:00:00',1);
+VALUES('01-2018', 1, '2018-05-11 00:00:00',1),('02-2018', 3, '2018-08-11 15:00:00',1),('03-2018', 2, '2018-12-11 15:33:00',1),('01-2019', 1, '2019-01-11 15:33:00',1);
 
-INSERT INTO pausalni_obrt.racun
-(broj_racuna, klijent_kupac_id, vrijeme_idavanja,izdao_korisnik_id)
-VALUES('02-2018', 3, '2018-08-11 15:00:00',1),('03-2018', 2, '2018-12-11 15:33:00',1),('01-2019', 1, '2019-01-11 15:33:00',1);
+insert into pausalni_obrt.stavka(usluga_proizvod_id,racun_id,kolicina) values(1,1,1),(2,1,1),(2,2,2);
 
-INSERT INTO pausalni_obrt.stavka
-(usluga_proizvod_id, racun_id, rabat, kolicina)
-VALUES(1, 1, 0.00, 5),(2, 1, 0.00, 2),(3, 2, 10, 1),(3, 3, 0.00, 1),(2, 4, 0.00, 10);
