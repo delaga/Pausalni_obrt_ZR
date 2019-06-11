@@ -88,5 +88,6 @@ VALUES('01-2018', 1, '2018-05-11 00:00:00',1),('02-2018', 3, '2018-08-11 15:00:0
 
 insert into pausalni_obrt.stavka(usluga_proizvod_id,racun_id,kolicina) values(1,1,1),(2,1,1),(2,2,2);
 
+alter table racun add column iznos_racuna decimal(18,2) not null;
 /*nešto*/
 
