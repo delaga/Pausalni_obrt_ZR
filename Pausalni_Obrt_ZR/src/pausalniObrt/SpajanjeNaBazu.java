@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class SpajanjeNaBazu {
 	
-	private Connection veza;
+	public Connection veza;
 
 	public Connection getVeza() {
 		return veza;
@@ -28,31 +28,13 @@ public class SpajanjeNaBazu {
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
-		citajIzBaze();
+		//citajIzBaze();
 
 	}
 	
-	private void citajIzBaze() {
-		try {
-			PreparedStatement izraz=veza.prepareStatement("select * from usluga_proizvod");
-			ResultSet rezultatCitanjaIzBaze=izraz.executeQuery();
-			while (rezultatCitanjaIzBaze.next()) {
-				System.out.println(rezultatCitanjaIzBaze.getInt("id")+" "+rezultatCitanjaIzBaze.getString("naziv")
-				+" "+rezultatCitanjaIzBaze.getString("opis")+" "+rezultatCitanjaIzBaze.getString("jedinica_mjere")
-				+" "+rezultatCitanjaIzBaze.getDouble("cijena"));
-				
-			}
-			rezultatCitanjaIzBaze.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 		
 
-	public static void main(String[] args) {
-		new SpajanjeNaBazu();
-	}
+
 }
 	
