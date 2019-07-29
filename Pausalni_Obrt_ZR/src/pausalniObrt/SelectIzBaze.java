@@ -111,6 +111,17 @@ public class SelectIzBaze {
 			}
 			break;
 		case 6:
+			try {
+				izraz=spajanje.veza.prepareStatement("select * from usluga_proizvod");
+				ResultSet rs=izraz.executeQuery();
+				while (rs.next()) {
+					System.out.println(rs.getInt("id")+" "+rs.getString("naziv")+" "+rs.getString("opis")+" "+
+				rs.getString("jedinica_mjere")+" ");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			break;
 		case 0:
