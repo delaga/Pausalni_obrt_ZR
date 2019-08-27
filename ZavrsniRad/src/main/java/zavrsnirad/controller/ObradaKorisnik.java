@@ -11,6 +11,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.utility.DelagaException;
+import zavrsnirad.utility.Kontrole;
 import zavrsnirad.utility.ObradaInterface;
 
 /**
@@ -33,12 +34,12 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
 
     @Override
     public Korisnik create(Korisnik k) throws DelagaException {
-        kontrolaImena(k);
-        kontrolaPrezimena(k);
-        kontrolaEmail(k);
+        Kontrole.kontrolaIme(k);
+        Kontrole.kontrolaPrezime(k);
+        Kontrole.kontrolaEmail(k);
         //kontrolaLozinka(k);
-        kontrolaMobitel(k);
-        kontrolaURL_potpis(k);
+        Kontrole.kontrolaMobitel(k);
+        Kontrole.kontrolaURL_potpis(k);
         dao.spremi(k);
         return k;
     }
@@ -46,12 +47,12 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
     @Override
     public void update(Korisnik k) throws DelagaException {
 
-        kontrolaImena(k);
-        kontrolaPrezimena(k);
-        kontrolaEmail(k);
+        Kontrole.kontrolaIme(k);
+        Kontrole.kontrolaPrezime(k);
+        Kontrole.kontrolaEmail(k);
         //kontrolaLozinka(k);
-        kontrolaMobitel(k);
-        kontrolaURL_potpis(k);
+        Kontrole.kontrolaMobitel(k);
+        Kontrole.kontrolaURL_potpis(k);
         dao.spremi(k);
     }
 
@@ -63,64 +64,6 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         return true;
     }
 
-    private void kontrolaImena(Korisnik k) throws DelagaException {
-        if (k.getIme() != null) {
-            k.setIme(k.getIme().trim());
-        }
-        if (k.getIme() == null || k.getIme().length() == 0) {
-            throw new DelagaException("Ime mora biti postavljeno");
-        }
-        if (k.getIme().length() > 33) {
-            throw new DelagaException("Mora biti kraće od 50 znakova");
-        }
-    }
-
-    private void kontrolaPrezimena(Korisnik k) throws DelagaException {
-        if (k.getPrezime() != null) {
-            k.setPrezime(k.getPrezime().trim());
-        }
-        if (k.getPrezime() == null || k.getPrezime().length() == 0) {
-            throw new DelagaException("Prezime mora biti postavljeno");
-        }
-        if (k.getPrezime().length() > 33) {
-            throw new DelagaException("Mora biti kraće od 50 znakova");
-        }
-    }
-
-    private static void kontrolaEmail(Korisnik k) throws DelagaException {
-        String email = k.getEmail();
-        try {
-            InternetAddress emailAddr = new InternetAddress(email);
-            emailAddr.validate();
-        } catch (AddressException ex) {
-            throw new DelagaException("Nije validan e-mail");
-        }
-    }
-    /*
-    obrada Password kada skužim kako ću uopće pohraniti password
-    
-    private void kontrolaLozinka(Korisnik k) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    */
-    private void kontrolaMobitel(Korisnik k) throws DelagaException {
-        String broj=k.getMobitel();
-        for (char c : broj.toCharArray()) {
-            if(!Character.isDigit(c)){
-                throw new DelagaException("Slova nisu tel.broj");
-            }
-        }
-    }
-
-    private void kontrolaURL_potpis(Korisnik k) throws DelagaException {
-        String url=k.getURL_potpisa();
-        try {
-            (new java.net.URL(url)).openStream().close();
-            
-            } 
-        catch (Exception ex) { }
-            throw new DelagaException("Ne valja URL");
-}
     }
     
     
