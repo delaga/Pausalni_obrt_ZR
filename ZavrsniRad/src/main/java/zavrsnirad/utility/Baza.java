@@ -38,8 +38,4 @@ public class Baza {
 		}
 		
 	}
-	
-        private void citajBazu() {
-		
-	}
 }
