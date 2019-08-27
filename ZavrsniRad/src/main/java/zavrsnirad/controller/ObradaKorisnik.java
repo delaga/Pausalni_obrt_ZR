@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import org.apache.commons.validator.UrlValidator;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.utility.DelagaException;
 import zavrsnirad.utility.ObradaInterface;
@@ -115,9 +114,14 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
 
     private void kontrolaURL_potpis(Korisnik k) throws DelagaException {
         String url=k.getURL_potpisa();
-        UrlValidator urlValidator = new UrlValidator();//zašto mi je ovo prekrižio?
-        urlValidator.isValid(url);
+        try {
+            (new java.net.URL(url)).openStream().close();
+            
+            } 
+        catch (Exception ex) { }
+            throw new DelagaException("Ne valja URL");
+}
     }
     
     
-}
+
