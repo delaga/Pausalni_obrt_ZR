@@ -15,18 +15,41 @@ public class Korisnik {
 	private String prezime;
 	private String email;
 	private String password;
-		
-	
-    public Korisnik() {
-	}
+        private String mobitel;
 
-    public Korisnik(int id, String ime, String prezime, String email, String password) {
+    public String getMobitel() {
+        return mobitel;
+    }
+
+    public void setMobitel(String mobitel) {
+        this.mobitel = mobitel;
+    }
+
+    public String getURL_potpisa() {
+        return URL_potpisa;
+    }
+
+    public void setURL_potpisa(String URL_potpisa) {
+        this.URL_potpisa = URL_potpisa;
+    }
+        //iako bih ja potpis nekako zamaskirao ... u bazi ili ...?
+        private String URL_potpisa;
+
+    public Korisnik() {
+    }
+
+    public Korisnik(int id, String ime, String prezime, String email, String password, String mobitel, String URL_potpisa) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.password = password;
+        this.mobitel = mobitel;
+        this.URL_potpisa = URL_potpisa;
     }
+		
+	
+  
     
     public int getId() {
         return id;
