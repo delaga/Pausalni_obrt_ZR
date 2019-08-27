@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.apache.commons.validator.UrlValidator;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.utility.DelagaException;
 import zavrsnirad.utility.ObradaInterface;
@@ -36,6 +37,9 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         kontrolaImena(k);
         kontrolaPrezimena(k);
         kontrolaEmail(k);
+        //kontrolaLozinka(k);
+        kontrolaMobitel(k);
+        kontrolaURL_potpis(k);
         dao.spremi(k);
         return k;
     }
@@ -46,7 +50,9 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         kontrolaImena(k);
         kontrolaPrezimena(k);
         kontrolaEmail(k);
-
+        //kontrolaLozinka(k);
+        kontrolaMobitel(k);
+        kontrolaURL_potpis(k);
         dao.spremi(k);
     }
 
@@ -65,7 +71,7 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         if (k.getIme() == null || k.getIme().length() == 0) {
             throw new DelagaException("Ime mora biti postavljeno");
         }
-        if (k.getIme().length() > 50) {
+        if (k.getIme().length() > 33) {
             throw new DelagaException("Mora biti kraće od 50 znakova");
         }
     }
@@ -77,7 +83,7 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         if (k.getPrezime() == null || k.getPrezime().length() == 0) {
             throw new DelagaException("Prezime mora biti postavljeno");
         }
-        if (k.getPrezime().length() > 50) {
+        if (k.getPrezime().length() > 33) {
             throw new DelagaException("Mora biti kraće od 50 znakova");
         }
     }
@@ -91,5 +97,27 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
             throw new DelagaException("Nije validan e-mail");
         }
     }
-    //obrada Password kada skužim kako
+    /*
+    obrada Password kada skužim kako ću uopće pohraniti password
+    
+    private void kontrolaLozinka(Korisnik k) throws DelagaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    */
+    private void kontrolaMobitel(Korisnik k) throws DelagaException {
+        String broj=k.getMobitel();
+        for (char c : broj.toCharArray()) {
+            if(!Character.isDigit(c)){
+                throw new DelagaException("Slova nisu tel.broj");
+            }
+        }
+    }
+
+    private void kontrolaURL_potpis(Korisnik k) throws DelagaException {
+        String url=k.getURL_potpisa();
+        UrlValidator urlValidator = new UrlValidator();//zašto mi je ovo prekrižio?
+        urlValidator.isValid(url);
+    }
+    
+    
 }
