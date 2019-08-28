@@ -5,9 +5,11 @@
  */
 package zavrsnirad.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import zavrsnirad.model.Klijent_kupac;
 import zavrsnirad.utility.DelagaException;
+import zavrsnirad.utility.Kontrole;
 import zavrsnirad.utility.ObradaInterface;
 
 /**
@@ -23,23 +25,34 @@ public class ObradaKlijent_kupac extends Obrada<Klijent_kupac> implements Obrada
     
 
     @Override
-    public Klijent_kupac create(Klijent_kupac entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Klijent_kupac create(Klijent_kupac kk) throws DelagaException {
+        Kontrole.kontrolaNaziv(kk);
+        Kontrole.kontrolaPostanskiBroj(kk);
+        Kontrole.kontrolaOIB_JMBG(kk);
+        dao.spremi(kk);
+        return kk;
     }
 
     @Override
     public List<Klijent_kupac> read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Klijent_kupac> kupci = new ArrayList<>();
+        Klijent_kupac kk= new Klijent_kupac(1,"","","","","","");
+        kupci.add(kk);
+        return kupci;
     }
 
     @Override
-    public void update(Klijent_kupac entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Klijent_kupac kk) throws DelagaException {
+        Kontrole.kontrolaNaziv(kk);
+        Kontrole.kontrolaPostanskiBroj(kk);
+        Kontrole.kontrolaOIB_JMBG(kk);
+        dao.spremi(kk);
     }
 
     @Override
-    public boolean delete(Klijent_kupac entitet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(Klijent_kupac kk) {
+        System.out.println("Brišem kk");
+        return true;
     }
     
 }

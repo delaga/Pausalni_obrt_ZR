@@ -7,8 +7,6 @@ package zavrsnirad.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.utility.DelagaException;
 import zavrsnirad.utility.Kontrole;
@@ -64,7 +62,4 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
         return true;
     }
 
-    }
-    
-    
-
+}

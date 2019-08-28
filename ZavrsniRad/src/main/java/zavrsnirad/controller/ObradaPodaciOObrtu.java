@@ -8,6 +8,7 @@ package zavrsnirad.controller;
 import java.util.List;
 import zavrsnirad.model.PodaciOObrtu;
 import zavrsnirad.utility.DelagaException;
+import zavrsnirad.utility.Kontrole;
 import zavrsnirad.utility.ObradaInterface;
 
 /**
@@ -21,8 +22,8 @@ public class ObradaPodaciOObrtu extends Obrada<PodaciOObrtu> implements ObradaIn
     }
 
     @Override
-    public PodaciOObrtu create(PodaciOObrtu entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PodaciOObrtu create(PodaciOObrtu o) throws DelagaException {
+        Kontrole.kontrolaNaziv(kk);
     }
 
     @Override
