@@ -6,6 +6,7 @@
 package zavrsnirad;
 
 import zavrsnirad.utility.HibernateUtil;
+import zavrsnirad.view.Autorizacija;
 
 
 
@@ -15,6 +16,6 @@ import zavrsnirad.utility.HibernateUtil;
  */
 public class Start {
     public static void main(String[] args) {
-        HibernateUtil.getSession();
+        new Autorizacija().setVisible(true);
     }
 }
