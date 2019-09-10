@@ -8,35 +8,31 @@ package zavrsnirad.controller;
 import java.util.List;
 import zavrsnirad.model.Racun;
 import zavrsnirad.utility.DelagaException;
-import zavrsnirad.utility.ObradaInterface;
 
 /**
  *
  * @author mirza
  */
-public class ObradaRacun extends Obrada<Racun> implements ObradaInterface<Racun>{
+public class ObradaRacun extends Obrada<Racun>{
     
     public ObradaRacun(){
         super();
     }
 
+    
+
     @Override
-    public Racun create(Racun entitet) throws DelagaException {
+    protected void kontrolaSpremi(Racun entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Racun> read() {
+    protected void kontrolaBrisi(Racun entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Racun entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(Racun entitet) {
+    public List<Racun> getEntiteti() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

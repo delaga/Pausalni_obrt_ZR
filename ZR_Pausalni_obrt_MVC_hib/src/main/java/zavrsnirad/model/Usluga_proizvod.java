@@ -6,6 +6,7 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,31 +15,23 @@ import javax.persistence.Id;
  * @author mirza
  */
 @Entity
-public class Usluga_proizvod implements Serializable{
-        @Id
-        private int id;
+public class Usluga_proizvod extends Entitet implements Serializable{
+        
 	private String naziv;
 	private String opis;
 	private String jedinica_mjere;
 	private Double cijena;
 
     public Usluga_proizvod() {
+        super();
     }
 
-    public Usluga_proizvod(int id, String naziv, String opis, String jedinica_mjere, Double cijena) {
-        this.id = id;
+    public Usluga_proizvod(String naziv, String opis, String jedinica_mjere, Double cijena, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+        super(Id, vrijemeKreiranja, vrijemePromjene);
         this.naziv = naziv;
         this.opis = opis;
         this.jedinica_mjere = jedinica_mjere;
         this.cijena = cijena;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNaziv() {
@@ -72,6 +65,5 @@ public class Usluga_proizvod implements Serializable{
     public void setCijena(Double cijena) {
         this.cijena = cijena;
     }
-        
-    
+
 }

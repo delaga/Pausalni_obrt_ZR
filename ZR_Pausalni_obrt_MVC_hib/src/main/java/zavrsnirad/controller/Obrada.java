@@ -5,15 +5,37 @@
  */
 package zavrsnirad.controller;
 
-import zavrsnirad.utility.DAO;
+import java.util.List;
+import org.hibernate.Session;
+import zavrsnirad.utility.DelagaException;
+import zavrsnirad.utility.HibernateUtil;
 
 /**
  *
  * @author mirza
  */
-public class Obrada<T> {
-    protected DAO<T> dao;
-    public Obrada(){
-        dao= new DAO<>();
+public abstract  class Obrada<T> {
+    protected abstract void kontrolaSpremi(T entitet)throws DelagaException;
+    protected abstract void kontrolaBrisi(T entitet)throws DelagaException;
+    public abstract List<T> getEntiteti();
+    
+    protected Session session;
+    public Obrada() {
+        this.session = HibernateUtil.getSession();
     }
+    public T spremi(T entitet) throws DelagaException{
+        kontrolaSpremi(entitet);
+        session.beginTransaction();
+        session.save(entitet);
+        session.getTransaction().commit();
+        return entitet;
+    }
+    
+    public void brisi(T entitet)throws DelagaException{
+        kontrolaBrisi(entitet);
+        session.beginTransaction();
+        session.delete(entitet);
+        session.getTransaction().commit();
+    }
+    
 }

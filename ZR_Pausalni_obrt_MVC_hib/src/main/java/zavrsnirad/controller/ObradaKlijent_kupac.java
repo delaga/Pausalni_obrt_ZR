@@ -5,69 +5,70 @@
  */
 package zavrsnirad.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import zavrsnirad.model.Klijent_kupac;
 import zavrsnirad.utility.DelagaException;
-import zavrsnirad.utility.Kontrole;
-import zavrsnirad.utility.ObradaInterface;
 
 /**
  *
  * @author mirza
  */
-public class ObradaKlijent_kupac extends Obrada<Klijent_kupac> implements ObradaInterface<Klijent_kupac>{
+public class ObradaKlijent_kupac extends Obrada<Klijent_kupac>{
 
     public ObradaKlijent_kupac() {
         super();
     }
     
     
-
-    @Override
-    public Klijent_kupac create(Klijent_kupac kk) throws DelagaException {
-        Kontrole.kontrolaNaziv(kk);
-        Kontrole.kontrolaPostanskiBroj(kk);
-        Kontrole.kontrolaOIB_JMBG(kk);
-        dao.spremi(kk);
-        return kk;
-    }
-
-    @Override
-    public List<Klijent_kupac> read() {
-        List<Klijent_kupac> kupci = new ArrayList<>();
-        Klijent_kupac kk= new Klijent_kupac(1,"","","","","","");
-        kupci.add(kk);
-        return kupci;
-    }
-
-    @Override
-    public void update(Klijent_kupac kk) throws DelagaException {
-        Kontrole.kontrolaNaziv(kk);
-        Kontrole.kontrolaPostanskiBroj(kk);
-        Kontrole.kontrolaOIB_JMBG(kk);
-        dao.spremi(kk);
-    }
-
-    @Override
-    public boolean delete(Klijent_kupac kk) {
-        System.out.println("Brišem kk");
-        return true;
-    }
+   
     public static void kontrolaOIB_JMBG(Klijent_kupac kk) throws DelagaException{
-        if(kk.getOib_jmbg().length()!=9 || kk.getOib_jmbg().length()!=11){
-            throw new DelagaException("Ne valja");
+       if (kk.getOib_jmbg().length() != 11){
+            throw new DelagaException("OIB mora imati 11 znamenaka");
         }
-        String broj=kk.getOib_jmbg();
-        for (char c : broj.toCharArray()) {
-            if(!Character.isDigit(c)){
-                throw new DelagaException("De ne zajebavaj se!");
-            }
+            
+
+        try {
+            Long.parseLong(kk.getOib_jmbg());
+        } catch (NumberFormatException e) {
+            throw new DelagaException("OIB ima znak koji nije brojčani");
+        }
+
+        int a = 10;
+        for (int i = 0; i < 10; i++) {
+            a = a + Integer.parseInt(kk.getOib_jmbg().substring(i, i+1));
+            a = a % 10;
+            if (a == 0)
+                a = 10;
+            a *= 2;
+            a = a % 11;
+        }
+        int kontrolni = 11 - a;
+        if (kontrolni == 10)
+            kontrolni = 0;
+
+        if(kontrolni != Integer.parseInt(kk.getOib_jmbg().substring(10))){
+            throw new DelagaException("OIB je neispravan");
         }
     }
     public static void kontrolaPostanskiBroj(Klijent_kupac kk) throws DelagaException{
-        if(kk.getPost_broj().length()<1 || kk.getPost_broj().length()>5){
+        if(kk.getPost_broj().length()!=5){
             throw new DelagaException("Ne valja PP");
             }
+    }
+
+    @Override
+    protected void kontrolaSpremi(Klijent_kupac entitet) throws DelagaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void kontrolaBrisi(Klijent_kupac entitet) throws DelagaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Klijent_kupac> getEntiteti() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

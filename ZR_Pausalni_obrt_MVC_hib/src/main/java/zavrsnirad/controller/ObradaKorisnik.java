@@ -12,57 +12,19 @@ import javax.mail.internet.InternetAddress;
 import zavrsnirad.model.Klijent_kupac;
 import zavrsnirad.model.Korisnik;
 import zavrsnirad.utility.DelagaException;
-import zavrsnirad.utility.ObradaInterface;
+
 
 /**
  *
  * @author mirza
  */
-public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<Korisnik> {
+public class ObradaKorisnik extends Obrada<Korisnik>{
 
     public ObradaKorisnik() {
         super();
     }
 
-    @Override
-    public List<Korisnik> read() {
-        List<Korisnik> korisnici = new ArrayList<>();
-        Korisnik k = new Korisnik(1, "Pero", "Peric", "mail@mail.com", "nekiPass", "0914510004", "https//nekaDomena.com/slika.png");
-        korisnici.add(k);
-        return korisnici;
-    }
-
-    @Override
-    public Korisnik create(Korisnik k) throws DelagaException {
-        kontrolaIme(k);
-        kontrolaPrezime(k);
-        kontrolaEmail(k);
-        //kontrolaLozinka(k);
-        kontrolaMobitel(k);
-        kontrolaURL_potpis(k);
-        dao.spremi(k);
-        return k;
-    }
-
-    @Override
-    public void update(Korisnik k) throws DelagaException {
-
-        kontrolaIme(k);
-        kontrolaPrezime(k);
-        kontrolaEmail(k);
-        //kontrolaLozinka(k);
-        kontrolaMobitel(k);
-        kontrolaURL_potpis(k);
-        dao.spremi(k);
-    }
-
-    @Override
-    public boolean delete(Korisnik k) {
-
-        System.out.println("Brišem korisnika");
-
-        return true;
-    }
+    
     public static void kontrolaIme(Korisnik k) throws DelagaException{
          if (k.getIme() != null) {
             k.setIme(k.getIme().trim());
@@ -121,6 +83,21 @@ public class ObradaKorisnik extends Obrada<Korisnik> implements ObradaInterface<
             } 
         catch (Exception ex) { }
             throw new DelagaException("Ne valja URL");
+    }
+
+    @Override
+    protected void kontrolaSpremi(Korisnik entitet) throws DelagaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void kontrolaBrisi(Korisnik entitet) throws DelagaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Korisnik> getEntiteti() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

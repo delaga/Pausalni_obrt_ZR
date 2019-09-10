@@ -6,6 +6,7 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,10 +15,9 @@ import javax.persistence.Id;
  * @author mirza
  */
 @Entity
-public class Klijent_kupac implements Serializable{
-        @Id
-        private int id;
-	private String naziv;
+public class Klijent_kupac extends Entitet implements Serializable{
+       
+        private String naziv;
 	private String adresa;
 	private String post_broj;
 	private String grad;
@@ -25,24 +25,17 @@ public class Klijent_kupac implements Serializable{
 	private String oib_jmbg;
 
     public Klijent_kupac() {
+        super();
     }
 
-    public Klijent_kupac(int id, String naziv, String adresa, String post_broj, String grad, String drzava, String oib_jmbg) {
-        this.id = id;
+    public Klijent_kupac(String naziv, String adresa, String post_broj, String grad, String drzava, String oib_jmbg, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+        super(Id, vrijemeKreiranja, vrijemePromjene);
         this.naziv = naziv;
         this.adresa = adresa;
         this.post_broj = post_broj;
         this.grad = grad;
         this.drzava = drzava;
         this.oib_jmbg = oib_jmbg;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNaziv() {
@@ -65,8 +58,8 @@ public class Klijent_kupac implements Serializable{
         return post_broj;
     }
 
-    public void setPost_broj(String postanski_broj) {
-        this.post_broj = postanski_broj;
+    public void setPost_broj(String post_broj) {
+        this.post_broj = post_broj;
     }
 
     public String getGrad() {
@@ -89,8 +82,8 @@ public class Klijent_kupac implements Serializable{
         return oib_jmbg;
     }
 
-    public void setOib_jmbg(String oib) {
-        this.oib_jmbg = oib;
+    public void setOib_jmbg(String oib_jmbg) {
+        this.oib_jmbg = oib_jmbg;
     }
-        
+
 }

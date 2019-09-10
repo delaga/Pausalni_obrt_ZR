@@ -8,37 +8,30 @@ package zavrsnirad.controller;
 import java.util.List;
 import zavrsnirad.model.PodaciOObrtu;
 import zavrsnirad.utility.DelagaException;
-import zavrsnirad.utility.Kontrole;
-import zavrsnirad.utility.ObradaInterface;
 
 /**
  *
  * @author mirza
  */
-public class ObradaPodaciOObrtu extends Obrada<PodaciOObrtu> implements ObradaInterface<PodaciOObrtu>{
+public class ObradaPodaciOObrtu extends Obrada<PodaciOObrtu>{
     
     public ObradaPodaciOObrtu(){
         super();
     }
 
+    
     @Override
-    public PodaciOObrtu create(PodaciOObrtu poo) throws DelagaException {
-       
-       return poo;
-    }
-
-    @Override
-    public List<PodaciOObrtu> read() {
+    protected void kontrolaSpremi(PodaciOObrtu entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(PodaciOObrtu entitet) throws DelagaException {
+    protected void kontrolaBrisi(PodaciOObrtu entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(PodaciOObrtu entitet) {
+    public List<PodaciOObrtu> getEntiteti() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

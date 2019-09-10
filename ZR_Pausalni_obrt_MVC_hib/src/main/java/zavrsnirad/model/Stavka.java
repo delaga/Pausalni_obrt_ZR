@@ -6,54 +6,49 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author mirza
  */
 @Entity
-public class Stavka implements Serializable{
-        @Id
-        private int id;
-	private int proizvod_id;
-	private int racun_id;
-	private double rabat;
-	private double kolicina;
-			
-	public Stavka() {
-		}
+public class Stavka extends Entitet implements Serializable {
 
-    public Stavka(int id, int proizvod_id, int racun_id, double rabat, double kolicina) {
-        this.id = id;
+    @ManyToOne
+    private Usluga_proizvod proizvod_id;
+    @ManyToOne
+    private Racun racun_id;
+    private double rabat;
+    private double kolicina;
+
+    public Stavka() {
+        super();
+    }
+
+    public Stavka(Usluga_proizvod proizvod_id, Racun racun_id, double rabat, double kolicina, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+        super(Id, vrijemeKreiranja, vrijemePromjene);
         this.proizvod_id = proizvod_id;
         this.racun_id = racun_id;
         this.rabat = rabat;
         this.kolicina = kolicina;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getProizvod_id() {
+    public Usluga_proizvod getProizvod_id() {
         return proizvod_id;
     }
 
-    public void setProizvod_id(int proizvod_id) {
+    public void setProizvod_id(Usluga_proizvod proizvod_id) {
         this.proizvod_id = proizvod_id;
     }
 
-    public int getRacun_id() {
+    public Racun getRacun_id() {
         return racun_id;
     }
 
-    public void setRacun_id(int racun_id) {
+    public void setRacun_id(Racun racun_id) {
         this.racun_id = racun_id;
     }
 
@@ -72,5 +67,5 @@ public class Stavka implements Serializable{
     public void setKolicina(double kolicina) {
         this.kolicina = kolicina;
     }
-        
+
 }

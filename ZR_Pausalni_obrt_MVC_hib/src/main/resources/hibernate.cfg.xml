@@ -39,6 +39,7 @@
         
         
         <!-- Ovdje navodimo naše mapirane klase -->
+        <mapping class="zavrsnirad.model.Entitet" />
         <mapping class="zavrsnirad.model.Klijent_kupac" />
         <mapping class="zavrsnirad.model.Korisnik" />
         <mapping class="zavrsnirad.model.PodaciOObrtu" />

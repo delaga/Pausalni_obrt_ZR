@@ -6,6 +6,7 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,9 +15,8 @@ import javax.persistence.Id;
  * @author mirza
  */
 @Entity
-public class Korisnik implements Serializable {
-        @Id
-        private int id;
+public class Korisnik extends Entitet implements Serializable {
+               
 	private String ime;
 	private String prezime;
 	private String email;
@@ -24,45 +24,18 @@ public class Korisnik implements Serializable {
         private String mobitel;
         private String potpis_URL;
 
-    public String getMobitel() {
-        return mobitel;
-    }
-
-    public void setMobitel(String mobitel) {
-        this.mobitel = mobitel;
-    }
-
-    public String getPotpis_URL() {
-        return potpis_URL;
-    }
-
-    public void setPotpis_URL(String URL_potpisa) {
-        this.potpis_URL = URL_potpisa;
-    }
-        
-
     public Korisnik() {
+        super();
     }
 
-    public Korisnik(int id, String ime, String prezime, String email, String lozinka, String mobitel, String potpis_URL) {
-        this.id = id;
+    public Korisnik(String ime, String prezime, String email, String lozinka, String mobitel, String potpis_URL, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+        super(Id, vrijemeKreiranja, vrijemePromjene);
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.lozinka = lozinka;
         this.mobitel = mobitel;
         this.potpis_URL = potpis_URL;
-    }
-		
-	
-  
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getIme() {
@@ -93,8 +66,24 @@ public class Korisnik implements Serializable {
         return lozinka;
     }
 
-    public void setLozinka(String password) {
-        this.lozinka = password;
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
     }
-        
-}
+
+    public String getMobitel() {
+        return mobitel;
+    }
+
+    public void setMobitel(String mobitel) {
+        this.mobitel = mobitel;
+    }
+
+    public String getPotpis_URL() {
+        return potpis_URL;
+    }
+
+    public void setPotpis_URL(String potpis_URL) {
+        this.potpis_URL = potpis_URL;
+    }
+      
+} 

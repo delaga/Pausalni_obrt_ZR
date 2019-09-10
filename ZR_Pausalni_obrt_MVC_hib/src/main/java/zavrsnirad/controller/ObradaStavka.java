@@ -8,35 +8,31 @@ package zavrsnirad.controller;
 import java.util.List;
 import zavrsnirad.model.Stavka;
 import zavrsnirad.utility.DelagaException;
-import zavrsnirad.utility.ObradaInterface;
 
 /**
  *
  * @author mirza
  */
-public class ObradaStavka extends Obrada<Stavka> implements ObradaInterface<Stavka>{
+public class ObradaStavka extends Obrada<Stavka>{
     
     public ObradaStavka(){
         super();
     }
 
+    
+
     @Override
-    public Stavka create(Stavka entitet) throws DelagaException {
+    protected void kontrolaSpremi(Stavka entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Stavka> read() {
+    protected void kontrolaBrisi(Stavka entitet) throws DelagaException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Stavka entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(Stavka entitet) {
+    public List<Stavka> getEntiteti() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
