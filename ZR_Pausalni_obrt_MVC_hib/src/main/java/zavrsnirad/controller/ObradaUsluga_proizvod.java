@@ -34,7 +34,7 @@ public class ObradaUsluga_proizvod extends Obrada<Usluga_proizvod>{
 
     @Override
     public List<Usluga_proizvod> getEntiteti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return session.createQuery("from Usluga_proizvod").list();
     }
     
 }

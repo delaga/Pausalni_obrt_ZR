@@ -33,7 +33,7 @@ public class ObradaRacun extends Obrada<Racun>{
 
     @Override
     public List<Racun> getEntiteti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return session.createQuery("from Racun").list();
     }
     
 }

@@ -99,7 +99,7 @@ public class ObradaKorisnik extends Obrada<Korisnik>{
 
     @Override
     public List<Korisnik> getEntiteti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return session.createQuery("from Korisnik").list();
     }
     
     

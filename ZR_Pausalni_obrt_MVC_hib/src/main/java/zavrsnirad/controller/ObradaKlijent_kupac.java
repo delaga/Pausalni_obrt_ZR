@@ -69,6 +69,6 @@ public class ObradaKlijent_kupac extends Obrada<Klijent_kupac>{
 
     @Override
     public List<Klijent_kupac> getEntiteti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return session.createQuery("from Klijent_kupac").list();
     }
 }
