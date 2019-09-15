@@ -7,6 +7,7 @@ package zavrsnirad;
 
 import zavrsnirad.utility.HibernateUtil;
 import zavrsnirad.view.Autorizacija;
+import zavrsnirad.view.SplashScreen;
 
 
 
@@ -16,6 +17,6 @@ import zavrsnirad.view.Autorizacija;
  */
 public class Start {
     public static void main(String[] args) {
-        new Autorizacija().setVisible(true);
+        new SplashScreen().setVisible(true);
     }
 }
