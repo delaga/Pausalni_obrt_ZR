@@ -36,15 +36,17 @@ public class SplashScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delagaTRANSP.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
 
         pack();
@@ -59,7 +61,7 @@ public class SplashScreen extends javax.swing.JFrame {
         @Override
         public void run() {
             if(new ObradaKlijent_kupac().getEntiteti().size()>0){
-                new Autorizacija().setVisible(true);
+                new ViewAutorizacija().setVisible(true);
                 dispose();
             }
         }

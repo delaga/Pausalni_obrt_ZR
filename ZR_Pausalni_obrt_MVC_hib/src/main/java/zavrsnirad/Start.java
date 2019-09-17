@@ -6,7 +6,7 @@
 package zavrsnirad;
 
 import zavrsnirad.utility.HibernateUtil;
-import zavrsnirad.view.Autorizacija;
+import zavrsnirad.view.ViewAutorizacija;
 import zavrsnirad.view.SplashScreen;
 
 

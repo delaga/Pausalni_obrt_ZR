@@ -9,12 +9,12 @@ package zavrsnirad.view;
  *
  * @author mirza
  */
-public class Autorizacija extends javax.swing.JFrame {
+public class ViewAutorizacija extends javax.swing.JFrame {
 
     /**
      * Creates new form Autorizacija
      */
-    public Autorizacija() {
+    public ViewAutorizacija() {
         initComponents();
     }
 
@@ -78,7 +78,7 @@ public class Autorizacija extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        new Glavni().setVisible(true);
+        new ViewGlavni().setVisible(true);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
