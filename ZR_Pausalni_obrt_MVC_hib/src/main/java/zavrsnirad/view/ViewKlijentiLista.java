@@ -5,17 +5,28 @@
  */
 package zavrsnirad.view;
 
+import javax.swing.DefaultListModel;
+import zavrsnirad.controller.Obrada;
+import zavrsnirad.controller.ObradaKlijent_kupac;
+import zavrsnirad.model.Klijent_kupac;
+
 /**
  *
  * @author mirza
  */
 public class ViewKlijentiLista extends javax.swing.JFrame {
+    
+    private ObradaKlijent_kupac obrada;
 
     /**
      * Creates new form ViewKlijentiLista
      */
     public ViewKlijentiLista() {
         initComponents();
+        obrada=new ObradaKlijent_kupac();
+        lista.setCellRenderer(new KlijentiKupciCellRenderer());
+        ucitaj();
+        
     }
 
     /**
@@ -29,7 +40,7 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lista = new javax.swing.JList<>();
         btnNovi = new javax.swing.JButton();
         btnUredi = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
@@ -39,12 +50,12 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Klijenti / Kupci ..."));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lista.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,7 +122,20 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     private void btnNoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviActionPerformed
         new ViewKlijentKupac().setVisible(true);
     }//GEN-LAST:event_btnNoviActionPerformed
+private void ucitaj() {
+        DefaultListModel<Klijent_kupac> model = new DefaultListModel<>();
+        obrada.getEntiteti().forEach(
+                (klijent_kupac) -> {
+                    model.addElement(klijent_kupac);
+                });
 
+        lista.setModel(model);
+        lista.repaint();
+    }
+@Override
+    public void list() {
+        super.list(); //To change body of generated methods, choose Tools | Templates.
+    }
     /**
      * @param args the command line arguments
      */
@@ -121,8 +145,8 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
     private javax.swing.JButton btnNovi;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnUredi;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables
 }
