@@ -5,6 +5,7 @@
  */
 package zavrsnirad.view;
 
+import java.awt.Color;
 import zavrsnirad.controller.ObradaKlijent_kupac;
 
 /**
@@ -20,6 +21,7 @@ public class SplashScreen extends javax.swing.JFrame {
         initComponents();
         Ucitavanje ucitavanje = new Ucitavanje();
         ucitavanje.start();
+        setBackground(new Color(0,0,0,0));
     }
 
     /**
@@ -37,6 +39,7 @@ public class SplashScreen extends javax.swing.JFrame {
         setUndecorated(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delagaTRANSP.png"))); // NOI18N
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

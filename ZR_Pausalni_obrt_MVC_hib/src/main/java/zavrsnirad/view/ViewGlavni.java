@@ -297,7 +297,7 @@ public class ViewGlavni extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuObrtActionPerformed
 
     private void btnKlijentiKupciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlijentiKupciActionPerformed
-        new ViewKlijentKupac().setVisible(true);
+        new ViewKlijentiLista().setVisible(true);
     }//GEN-LAST:event_btnKlijentiKupciActionPerformed
 
     private void btnProizvodiUslugeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProizvodiUslugeActionPerformed
