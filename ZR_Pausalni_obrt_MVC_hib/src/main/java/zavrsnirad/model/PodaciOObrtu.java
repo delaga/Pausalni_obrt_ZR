@@ -15,7 +15,8 @@ import javax.persistence.Id;
  */
 @Entity
 public class PodaciOObrtu implements Serializable{
-        @Id
+       @Id
+        private int id;
         private String naziv;
 	private String vlasnik;
 	private String adresa;
@@ -29,20 +30,22 @@ public class PodaciOObrtu implements Serializable{
 	
 	public PodaciOObrtu() {
 	}
+
+    public PodaciOObrtu(int id, String naziv, String vlasnik, String adresa, String oib, String iban, String banka, String djelatnost, String email, String telefon_mobitel, String logo_url) {
+        this.id = id;
+        this.naziv = naziv;
+        this.vlasnik = vlasnik;
+        this.adresa = adresa;
+        this.oib = oib;
+        this.iban = iban;
+        this.banka = banka;
+        this.djelatnost = djelatnost;
+        this.email = email;
+        this.telefon_mobitel = telefon_mobitel;
+        this.logo_url = logo_url;
+    }
 	
-	public PodaciOObrtu(String naziv, String vlasnik, String adresa, String oib, String iban, String banka,
-			String djelatnost, String email, String telefon_mobitel, String logo_url) {
-		this.naziv = naziv;
-		this.vlasnik = vlasnik;
-		this.adresa = adresa;
-		this.oib = oib;
-		this.iban = iban;
-		this.banka = banka;
-		this.djelatnost = djelatnost;
-		this.email = email;
-		this.telefon_mobitel = telefon_mobitel;
-		this.logo_url = logo_url;
-	}
+	
 	public String getNaziv() {
 		return naziv;
 	}

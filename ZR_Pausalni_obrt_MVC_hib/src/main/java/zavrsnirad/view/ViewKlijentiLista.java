@@ -50,11 +50,6 @@ public class ViewKlijentiLista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Klijenti / Kupci ..."));
 
-        lista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(lista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,6 +142,6 @@ private void ucitaj() {
     private javax.swing.JButton btnUredi;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lista;
+    private javax.swing.JList<Klijent_kupac> lista;
     // End of variables declaration//GEN-END:variables
 }

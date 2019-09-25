@@ -5,17 +5,33 @@
  */
 package zavrsnirad.view;
 
+import zavrsnirad.controller.ObradaPodaciOObrtu;
+import zavrsnirad.model.PodaciOObrtu;
+import zavrsnirad.utility.HibernateUtil;
+
 /**
  *
  * @author mirza
  */
 public class ViewPodaciOObrtu extends javax.swing.JFrame {
-
+    private ObradaPodaciOObrtu obrada;
     /**
      * Creates new form ViewPodaciOObrtu
      */
     public ViewPodaciOObrtu() {
         initComponents();
+        obrada=new ObradaPodaciOObrtu();
+        PodaciOObrtu pod=HibernateUtil.getSession().get(PodaciOObrtu.class, 1);
+        txtNaziv.setText(pod.getNaziv());
+        txtAdresa.setText(pod.getAdresa());
+        txtBanka.setText(pod.getBanka());
+        txtDjelatnost.setText(pod.getDjelatnost());
+        txtEmail.setText(pod.getEmail());
+        txtIBAN.setText(pod.getIban());
+        txtLogo.setText(pod.getLogo_url());
+        txtMobitel.setText(pod.getTelefon_mobitel());
+        txtOIB.setText(pod.getOib());
+        txtVlasnik.setText(pod.getVlasnik());
     }
 
     /**
