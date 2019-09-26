@@ -28,12 +28,21 @@ public class Racun extends Entitet implements Serializable{
 	private String napomena;
 	private String nacin_placanja;
 	private Double iznos_racuna;
+        private Integer vrstaRacuna;
+
+    public Integer getVrstaRacuna() {
+        return vrstaRacuna;
+    }
+
+    public void setVrstaRacuna(Integer vrstaRacuna) {
+        this.vrstaRacuna = vrstaRacuna;
+    }
 
     public Racun() {
         super();
     }
 
-    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Double iznos_racuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Double iznos_racuna, Integer vrstaRacuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.broj_racuna = broj_racuna;
         this.klijent_kupac = klijent_kupac;
@@ -44,7 +53,10 @@ public class Racun extends Entitet implements Serializable{
         this.napomena = napomena;
         this.nacin_placanja = nacin_placanja;
         this.iznos_racuna = iznos_racuna;
+        this.vrstaRacuna = vrstaRacuna;
     }
+
+    
 
     public String getBroj_racuna() {
         return broj_racuna;

@@ -162,7 +162,7 @@ public class ViewKorisnici extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        // TODO add your handling code here:
+        new ViewKorisnik().setVisible(true);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed

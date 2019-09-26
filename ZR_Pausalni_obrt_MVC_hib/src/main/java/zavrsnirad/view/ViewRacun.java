@@ -5,6 +5,8 @@
  */
 package zavrsnirad.view;
 
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author mirza
@@ -16,6 +18,11 @@ public class ViewRacun extends javax.swing.JFrame {
      */
     public ViewRacun() {
         initComponents();
+        ButtonGroup group=new ButtonGroup();
+        group.add(rbtRobaDomaci);
+        group.add(rbtRobaInozemni);
+        group.add(rbtUslugeDomaci);
+        group.add(rbtUslugeInozemni);
     }
     private void ucitajRacun(){
         
@@ -30,6 +37,7 @@ public class ViewRacun extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -371,6 +379,7 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JButton btnSpremi;
     private javax.swing.JButton btnSpremiIIspisi;
     private javax.swing.JButton btnStorniraj;
+    private javax.swing.ButtonGroup btngGroup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
