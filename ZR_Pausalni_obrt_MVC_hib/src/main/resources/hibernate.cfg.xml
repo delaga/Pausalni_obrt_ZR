@@ -9,7 +9,7 @@
                 character set utf8 collate utf8_general_ci;
         -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mariadb://134.209.23.129/pausalni_obrt?useSSL=false</property>
+        <property name="connection.url">jdbc:mariadb://134.209.23.129/ZR_pausalni_obrt?useSSL=false</property>
         <property name="connection.username">edunova</property>
         <property name="connection.password">edunova</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->

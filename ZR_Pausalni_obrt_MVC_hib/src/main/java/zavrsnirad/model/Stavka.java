@@ -18,9 +18,9 @@ import javax.persistence.ManyToOne;
 public class Stavka extends Entitet implements Serializable {
 
     @ManyToOne
-    private Usluga_proizvod proizvod_id;
+    private Usluga_proizvod proizvod;
     @ManyToOne
-    private Racun racun_id;
+    private Racun racun;
     private double rabat;
     private double kolicina;
 
@@ -28,28 +28,28 @@ public class Stavka extends Entitet implements Serializable {
         super();
     }
 
-    public Stavka(Usluga_proizvod proizvod_id, Racun racun_id, double rabat, double kolicina, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Stavka(Usluga_proizvod proizvod, Racun racun, double rabat, double kolicina, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
-        this.proizvod_id = proizvod_id;
-        this.racun_id = racun_id;
+        this.proizvod = proizvod;
+        this.racun = racun;
         this.rabat = rabat;
         this.kolicina = kolicina;
     }
 
-    public Usluga_proizvod getProizvod_id() {
-        return proizvod_id;
+    public Usluga_proizvod getProizvod() {
+        return proizvod;
     }
 
-    public void setProizvod_id(Usluga_proizvod proizvod_id) {
-        this.proizvod_id = proizvod_id;
+    public void setProizvod(Usluga_proizvod proizvod) {
+        this.proizvod = proizvod;
     }
 
-    public Racun getRacun_id() {
-        return racun_id;
+    public Racun getRacun() {
+        return racun;
     }
 
-    public void setRacun_id(Racun racun_id) {
-        this.racun_id = racun_id;
+    public void setRacun(Racun racun) {
+        this.racun = racun;
     }
 
     public double getRabat() {

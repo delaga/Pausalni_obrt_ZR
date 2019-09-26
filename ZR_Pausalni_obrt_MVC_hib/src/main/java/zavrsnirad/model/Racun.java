@@ -19,12 +19,12 @@ import javax.persistence.ManyToOne;
 public class Racun extends Entitet implements Serializable{
         private String broj_racuna;
         @ManyToOne
-	private Klijent_kupac klijent_kupac_id;
+	private Klijent_kupac klijent_kupac;
 	private Date datum_izdavanja;
 	private Date datum_dospijeca;
 	private Date datum_isporuke;
         @ManyToOne
-	private Korisnik izdao_user_id;
+	private Korisnik korisnik;
 	private String napomena;
 	private String nacin_placanja;
 	private Double iznos_racuna;
@@ -33,14 +33,14 @@ public class Racun extends Entitet implements Serializable{
         super();
     }
 
-    public Racun(String broj_racuna, Klijent_kupac klijent_kupac_id, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik izdao_user_id, String napomena, String nacin_placanja, Double iznos_racuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Double iznos_racuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.broj_racuna = broj_racuna;
-        this.klijent_kupac_id = klijent_kupac_id;
+        this.klijent_kupac = klijent_kupac;
         this.datum_izdavanja = datum_izdavanja;
         this.datum_dospijeca = datum_dospijeca;
         this.datum_isporuke = datum_isporuke;
-        this.izdao_user_id = izdao_user_id;
+        this.korisnik = korisnik;
         this.napomena = napomena;
         this.nacin_placanja = nacin_placanja;
         this.iznos_racuna = iznos_racuna;
@@ -54,12 +54,12 @@ public class Racun extends Entitet implements Serializable{
         this.broj_racuna = broj_racuna;
     }
 
-    public Klijent_kupac getKlijent_kupac_id() {
-        return klijent_kupac_id;
+    public Klijent_kupac getKlijent_kupac() {
+        return klijent_kupac;
     }
 
-    public void setKlijent_kupac_id(Klijent_kupac klijent_kupac_id) {
-        this.klijent_kupac_id = klijent_kupac_id;
+    public void setKlijent_kupac(Klijent_kupac klijent_kupac) {
+        this.klijent_kupac = klijent_kupac;
     }
 
     public Date getDatum_izdavanja() {
@@ -86,12 +86,12 @@ public class Racun extends Entitet implements Serializable{
         this.datum_isporuke = datum_isporuke;
     }
 
-    public Korisnik getIzdao_user_id() {
-        return izdao_user_id;
+    public Korisnik getKorisnik() {
+        return korisnik;
     }
 
-    public void setIzdao_user_id(Korisnik izdao_user_id) {
-        this.izdao_user_id = izdao_user_id;
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 
     public String getNapomena() {

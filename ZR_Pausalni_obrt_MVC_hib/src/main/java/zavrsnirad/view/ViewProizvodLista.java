@@ -5,17 +5,59 @@
  */
 package zavrsnirad.view;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import zavrsnirad.controller.ObradaUsluga_proizvod;
+import zavrsnirad.model.Usluga_proizvod;
+
 /**
  *
  * @author mirza
  */
 public class ViewProizvodLista extends javax.swing.JFrame {
 
+    private ObradaUsluga_proizvod obrada;
+
     /**
      * Creates new form ViewProizvodLista
      */
     public ViewProizvodLista() {
         initComponents();
+        obrada=new ObradaUsluga_proizvod();
+        ucitaj();
+    }
+
+    private void ucitaj() {
+        SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
+        DefaultTableModel dtm = (DefaultTableModel) tblProizvodiUsluge.getModel();
+        List<Usluga_proizvod> kupci = obrada.getEntiteti();
+        String[] colNames = {"Naziv", "Opis", "Jed. mjera", "Cijena", "Vrijeme kreiranja", "Vrijeme promjene"};
+        for (int i = 0; i < colNames.length; i++) {
+
+            TableColumn tc = tblProizvodiUsluge.getColumnModel().getColumn(i);
+            tc.setHeaderValue(colNames[i]);
+        }
+        kupci.forEach((pu) -> {
+            try {
+                String red[] = {
+                    pu.getNaziv(),
+                    pu.getOpis(),
+                    pu.getJedinica_mjere(),
+                    pu.getCijena().toString(),
+                    df.format(pu.getVrijemeKreiranja()),
+                    df.format(pu.getVrijemePromjene())
+
+                };
+
+                dtm.addRow(red);
+
+            } catch (Exception e) {
+
+            }
+
+        });
     }
 
     /**
@@ -28,8 +70,8 @@ public class ViewProizvodLista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblProizvodiUsluge = new javax.swing.JTable();
         btnNovi = new javax.swing.JButton();
         btnUredi = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
@@ -39,7 +81,15 @@ public class ViewProizvodLista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Proizvodi / Usluge ..."));
 
-        jScrollPane1.setViewportView(jList1);
+        tblProizvodiUsluge.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+            }
+        ));
+        jScrollPane2.setViewportView(tblProizvodiUsluge);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -47,15 +97,15 @@ public class ViewProizvodLista extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
 
         btnNovi.setText("Novi");
@@ -78,25 +128,25 @@ public class ViewProizvodLista extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(102, 102, 102)
                 .addComponent(btnNovi, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUredi, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovi)
                     .addComponent(btnUredi)
                     .addComponent(btnObrisi))
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -110,14 +160,13 @@ public class ViewProizvodLista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovi;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnUredi;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblProizvodiUsluge;
     // End of variables declaration//GEN-END:variables
 }

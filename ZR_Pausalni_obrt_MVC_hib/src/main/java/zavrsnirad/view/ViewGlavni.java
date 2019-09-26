@@ -19,22 +19,23 @@ import zavrsnirad.model.Klijent_kupac;
 import zavrsnirad.model.Racun;
 import zavrsnirad.utility.Utils;
 
-
 /**
  *
  * @author mirza
  */
 public class ViewGlavni extends javax.swing.JFrame {
+
     private ObradaRacun obrada;
+
     /**
      * Creates new form Glavni
      */
     public ViewGlavni() {
         initComponents();
         new Vrijeme().start();
-        obrada=new ObradaRacun();
-        
-        
+        obrada = new ObradaRacun();
+        ucitaj();
+
     }
 
     /**
@@ -145,13 +146,10 @@ public class ViewGlavni extends javax.swing.JFrame {
 
         tblRacuni.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
         jScrollPane2.setViewportView(tblRacuni);
@@ -306,6 +304,46 @@ public class ViewGlavni extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 private void ucitaj() {
+        SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
+        DefaultTableModel dtm = (DefaultTableModel) tblRacuni.getModel();
+        List<Racun> racuni = obrada.getEntiteti();
+        String[] colNames = {"Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
+
+        for (int i = 0; i < colNames.length; i++) {
+
+            TableColumn tc = tblRacuni.getColumnModel().getColumn(i);
+            tc.setHeaderValue(colNames[i]);
+        }
+        
+        racuni.forEach((r) -> {
+            try {
+                String red[] = {
+                    r.getBroj_racuna(),
+                    r.getKlijent_kupac().getNaziv(),
+                    df.format(r.getDatum_izdavanja()),
+                    df.format(r.getDatum_dospijeca()),
+                    df.format(r.getDatum_isporuke()),
+                    r.getIznos_racuna().toString(),
+                    r.getNacin_placanja(),
+                    r.getKorisnik().getPrezime(),
+                    r.getNapomena(),
+                    
+                };
+
+                dtm.addRow(red);
+
+            } catch (Exception e) {
+                String red[] = {
+                    "aaaa",
+                    "bbb",
+                    "cccc",
+                    "ddd"
+                };
+                dtm.addRow(red);
+            }
+
+        });
+
 //        String[] colNames = {"Broj računa", "Klijent/Kupac", "Datum izdavanja","Datum dospiječa","Datum isporuke","Iznos","Način plačanja","Izdao","Napomena"};
 //        DefaultTableModel tableModel=new DefaultTableModel();
 //        List<Racun> racuni=obrada.getEntiteti();
@@ -326,8 +364,6 @@ private void ucitaj() {
 //        }
 //        tblRacuni.setModel(tableModel);
 //    
-    
-    
 //        DefaultListModel<Racun> model = new DefaultListModel<>();
 //        obrada.getEntiteti().forEach(
 //                (racun) -> {
@@ -337,7 +373,8 @@ private void ucitaj() {
 //        lista.setModel(model);
 //        lista.repaint();
     }
-@Override
+
+    @Override
     public void list() {
         super.list(); //To change body of generated methods, choose Tools | Templates.
     }
@@ -354,7 +391,7 @@ private void ucitaj() {
     }//GEN-LAST:event_btnKlijentiKupciActionPerformed
 
     private void btnProizvodiUslugeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProizvodiUslugeActionPerformed
-        new ViewProizvodUsluga().setVisible(true);
+        new ViewProizvodLista().setVisible(true);
     }//GEN-LAST:event_btnProizvodiUslugeActionPerformed
 
     private void jMenuItemDBserverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDBserverActionPerformed
@@ -371,21 +408,24 @@ private void ucitaj() {
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
         new ViewRacun().setVisible(true);
-        //ali ga treba popuniti sa odabranim računom
+        
+        
     }//GEN-LAST:event_btnUrediActionPerformed
-    private class Vrijeme extends Thread{
-        SimpleDateFormat vrijemeFormat =new SimpleDateFormat(Utils.getFormatDatumaIVremena());
-    @Override
-    public void run(){
-        lblTime.setText(vrijemeFormat.format(new Date()));
+    private class Vrijeme extends Thread {
+
+        SimpleDateFormat vrijemeFormat = new SimpleDateFormat(Utils.getFormatDatumaIVremena());
+
+        @Override
+        public void run() {
+            lblTime.setText(vrijemeFormat.format(new Date()));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-               
+
             }
             run();
-    }       
-        
+        }
+
     }
     /**
      * @param args the command line arguments

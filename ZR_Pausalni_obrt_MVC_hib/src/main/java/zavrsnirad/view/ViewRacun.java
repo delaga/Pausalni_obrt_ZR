@@ -10,14 +10,17 @@ package zavrsnirad.view;
  * @author mirza
  */
 public class ViewRacun extends javax.swing.JFrame {
-
+    private ViewGlavni glavni;
     /**
      * Creates new form ViewRacun
      */
     public ViewRacun() {
         initComponents();
     }
+    private void ucitajRacun(){
+        
 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
