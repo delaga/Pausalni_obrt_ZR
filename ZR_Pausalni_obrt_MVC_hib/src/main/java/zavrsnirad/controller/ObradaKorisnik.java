@@ -84,7 +84,13 @@ public class ObradaKorisnik extends Obrada<Korisnik>{
         catch (Exception ex) { }
             throw new DelagaException("Ne valja URL");
     }
-
+    public Korisnik getKorisnik(String email){
+        
+        return (Korisnik)session.createQuery("from Korisnik a where a.email=:email ")
+                .setParameter("email", email).uniqueResult();
+        
+        
+    }
     @Override
     protected void kontrolaSpremi(Korisnik entitet) throws DelagaException {
         kontrolaIme(entitet);

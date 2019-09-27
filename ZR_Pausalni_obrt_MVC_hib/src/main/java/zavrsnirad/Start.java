@@ -5,6 +5,7 @@
  */
 package zavrsnirad;
 
+import zavrsnirad.testingDumine.TestKorisnik;
 import zavrsnirad.utility.HibernateUtil;
 import zavrsnirad.view.ViewAutorizacija;
 import zavrsnirad.view.SplashScreen;
@@ -17,6 +18,8 @@ import zavrsnirad.view.SplashScreen;
  */
 public class Start {
     public static void main(String[] args) {
+        //TestKorisnik.test();
         new SplashScreen().setVisible(true);
+        
     }
 }

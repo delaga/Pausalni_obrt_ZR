@@ -23,12 +23,21 @@ public class Korisnik extends Entitet implements Serializable {
 	private String lozinka;
         private String mobitel;
         private String potpis_URL;
+        private boolean admin;
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
     public Korisnik() {
         super();
     }
 
-    public Korisnik(String ime, String prezime, String email, String lozinka, String mobitel, String potpis_URL, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Korisnik(String ime, String prezime, String email, String lozinka, String mobitel, String potpis_URL, boolean admin, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.ime = ime;
         this.prezime = prezime;
@@ -36,7 +45,10 @@ public class Korisnik extends Entitet implements Serializable {
         this.lozinka = lozinka;
         this.mobitel = mobitel;
         this.potpis_URL = potpis_URL;
+        this.admin = admin;
     }
+
+   
 
     public String getIme() {
         return ime;

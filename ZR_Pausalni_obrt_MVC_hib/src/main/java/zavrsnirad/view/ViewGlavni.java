@@ -190,6 +190,11 @@ public class ViewGlavni extends javax.swing.JFrame {
 
         btnKalkulator.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnKalkulator.setText("Kalkulator");
+        btnKalkulator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKalkulatorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -411,6 +416,10 @@ private void ucitaj() {
         
         
     }//GEN-LAST:event_btnUrediActionPerformed
+
+    private void btnKalkulatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKalkulatorActionPerformed
+        new Kalkulator().setVisible(true);
+    }//GEN-LAST:event_btnKalkulatorActionPerformed
     private class Vrijeme extends Thread {
 
         SimpleDateFormat vrijemeFormat = new SimpleDateFormat(Utils.getFormatDatumaIVremena());
