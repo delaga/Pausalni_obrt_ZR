@@ -6,6 +6,7 @@
 package zavrsnirad.view;
 
 import javax.swing.ButtonGroup;
+import zavrsnirad.model.Racun;
 
 /**
  *
@@ -13,20 +14,29 @@ import javax.swing.ButtonGroup;
  */
 public class ViewRacun extends javax.swing.JFrame {
     private ViewGlavni glavni;
+    private Racun r;
     /**
      * Creates new form ViewRacun
      */
-    public ViewRacun() {
+    public ViewRacun(Racun r) {
         initComponents();
+        this.r=r;
         ButtonGroup group=new ButtonGroup();
         group.add(rbtRobaDomaci);
         group.add(rbtRobaInozemni);
         group.add(rbtUslugeDomaci);
         group.add(rbtUslugeInozemni);
+        ucitajRacun();
     }
     private void ucitajRacun(){
-        
-
+        txtBrojRacuna.setText(r.getBroj_racuna());
+        txtDatumDospijeca.setText(r.getDatum_dospijeca().toString());
+        txtDatumIsporuke.setText(r.getDatum_isporuke().toString());
+        txtIzdaoKorisnik.setText(r.getKorisnik().getPrezime());
+        txtKupac.setText(r.getKlijent_kupac().getNaziv());
+        txtNacinPlacanja.setText(r.getNacin_placanja());
+        txtVrijemeIzdavanja.setText(r.getDatum_izdavanja().toString());
+        txtfNapomena.setText(r.getNapomena());
     }
     /**
      * This method is called from within the constructor to initialize the form.

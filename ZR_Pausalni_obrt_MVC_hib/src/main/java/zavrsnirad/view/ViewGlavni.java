@@ -33,6 +33,7 @@ public class ViewGlavni extends javax.swing.JFrame {
     public ViewGlavni() {
         initComponents();
         new Vrijeme().start();
+        tblRacuni.setDefaultEditor(Object.class, null);
         obrada = new ObradaRacun();
         ucitaj();
 
@@ -149,9 +150,15 @@ public class ViewGlavni extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
             }
         ));
+        tblRacuni.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblRacuni.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRacuniMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblRacuni);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -312,17 +319,23 @@ private void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblRacuni.getModel();
         List<Racun> racuni = obrada.getEntiteti();
-        String[] colNames = {"Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
+        String[] colNames = {"objekt","Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
 
         for (int i = 0; i < colNames.length; i++) {
-
+             
             TableColumn tc = tblRacuni.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
+            if(i==0){
+                tc.setWidth(0);
+                tc.setMinWidth(0);
+                tc.setMaxWidth(0); 
+             }
         }
         
         racuni.forEach((r) -> {
             try {
-                String red[] = {
+                Object red[] = {
+                    r,
                     r.getBroj_racuna(),
                     r.getKlijent_kupac().getNaziv(),
                     df.format(r.getDatum_izdavanja()),
@@ -408,11 +421,14 @@ private void ucitaj() {
     }//GEN-LAST:event_jMenuKorisniciActionPerformed
 
     private void btnNoviRačunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviRačunActionPerformed
-        new ViewRacun().setVisible(true);
+        Racun r= new Racun();
+        new ViewRacun(r).setVisible(true);
     }//GEN-LAST:event_btnNoviRačunActionPerformed
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
-        new ViewRacun().setVisible(true);
+        
+        Racun r = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+        new ViewRacun(r).setVisible(true);
         
         
     }//GEN-LAST:event_btnUrediActionPerformed
@@ -420,6 +436,15 @@ private void ucitaj() {
     private void btnKalkulatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKalkulatorActionPerformed
         new Kalkulator().setVisible(true);
     }//GEN-LAST:event_btnKalkulatorActionPerformed
+
+    private void tblRacuniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRacuniMouseClicked
+        if(evt.getClickCount()==2){
+            //System.out.println(tblRacuni.getSelectedRow());
+            Racun r = (Racun)tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+           // System.out.println(oznaceni.getId());
+             new ViewRacun(r).setVisible(true);      
+        }
+    }//GEN-LAST:event_tblRacuniMouseClicked
     private class Vrijeme extends Thread {
 
         SimpleDateFormat vrijemeFormat = new SimpleDateFormat(Utils.getFormatDatumaIVremena());
