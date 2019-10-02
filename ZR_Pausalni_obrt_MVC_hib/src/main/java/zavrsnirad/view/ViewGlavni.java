@@ -319,19 +319,19 @@ private void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblRacuni.getModel();
         List<Racun> racuni = obrada.getEntiteti();
-        String[] colNames = {"objekt","Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
+        String[] colNames = {"objekt", "Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
 
         for (int i = 0; i < colNames.length; i++) {
-             
+
             TableColumn tc = tblRacuni.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
-            if(i==0){
+            if (i == 0) {
                 tc.setWidth(0);
                 tc.setMinWidth(0);
-                tc.setMaxWidth(0); 
-             }
+                tc.setMaxWidth(0);
+            }
         }
-        
+
         racuni.forEach((r) -> {
             try {
                 Object red[] = {
@@ -344,9 +344,7 @@ private void ucitaj() {
                     r.getIznos_racuna().toString(),
                     r.getNacin_placanja(),
                     r.getKorisnik().getPrezime(),
-                    r.getNapomena(),
-                    
-                };
+                    r.getNapomena(),};
 
                 dtm.addRow(red);
 
@@ -421,16 +419,16 @@ private void ucitaj() {
     }//GEN-LAST:event_jMenuKorisniciActionPerformed
 
     private void btnNoviRačunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviRačunActionPerformed
-        Racun r= new Racun();
+        Racun r = new Racun();
         new ViewRacun(r).setVisible(true);
     }//GEN-LAST:event_btnNoviRačunActionPerformed
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
-        
+
         Racun r = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
         new ViewRacun(r).setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_btnUrediActionPerformed
 
     private void btnKalkulatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKalkulatorActionPerformed
@@ -438,11 +436,11 @@ private void ucitaj() {
     }//GEN-LAST:event_btnKalkulatorActionPerformed
 
     private void tblRacuniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRacuniMouseClicked
-        if(evt.getClickCount()==2){
+        if (evt.getClickCount() == 2) {
             //System.out.println(tblRacuni.getSelectedRow());
-            Racun r = (Racun)tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
-           // System.out.println(oznaceni.getId());
-             new ViewRacun(r).setVisible(true);      
+            Racun r = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+            // System.out.println(oznaceni.getId());
+            new ViewRacun(r).setVisible(true);
         }
     }//GEN-LAST:event_tblRacuniMouseClicked
     private class Vrijeme extends Thread {

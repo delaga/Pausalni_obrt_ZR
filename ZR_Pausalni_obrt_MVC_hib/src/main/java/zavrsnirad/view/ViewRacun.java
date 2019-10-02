@@ -72,7 +72,7 @@ public class ViewRacun extends javax.swing.JFrame {
         rbtRobaInozemni = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listStavke = new javax.swing.JList<>();
         btnSpremi = new javax.swing.JButton();
         btnSpremiIIspisi = new javax.swing.JButton();
         btnIIspisi = new javax.swing.JButton();
@@ -134,12 +134,7 @@ public class ViewRacun extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Stavke ..."));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listStavke);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -398,11 +393,11 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<Stavke> listStavke;
     private javax.swing.JRadioButton rbtRobaDomaci;
     private javax.swing.JRadioButton rbtRobaInozemni;
     private javax.swing.JRadioButton rbtUslugeDomaci;
