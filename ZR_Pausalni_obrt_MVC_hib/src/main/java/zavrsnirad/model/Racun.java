@@ -6,10 +6,14 @@
 package zavrsnirad.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,8 +31,20 @@ public class Racun extends Entitet implements Serializable{
 	private Korisnik korisnik;
 	private String napomena;
 	private String nacin_placanja;
-	private Double iznos_racuna;
         private Integer vrstaRacuna;
+        
+        @OneToMany(mappedBy = "racun")
+    private List<Stavka> stavke = new ArrayList<>();
+
+    public List<Stavka> getStavke() {
+        return stavke;
+    }
+
+    public void setStavke(List<Stavka> stavke) {
+        this.stavke = stavke;
+    }
+        
+        
 
     public Integer getVrstaRacuna() {
         return vrstaRacuna;
@@ -42,7 +58,7 @@ public class Racun extends Entitet implements Serializable{
         super();
     }
 
-    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Double iznos_racuna, Integer vrstaRacuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
+    public Racun(String broj_racuna, Klijent_kupac klijent_kupac, Date datum_izdavanja, Date datum_dospijeca, Date datum_isporuke, Korisnik korisnik, String napomena, String nacin_placanja, Integer vrstaRacuna, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.broj_racuna = broj_racuna;
         this.klijent_kupac = klijent_kupac;
@@ -52,7 +68,6 @@ public class Racun extends Entitet implements Serializable{
         this.korisnik = korisnik;
         this.napomena = napomena;
         this.nacin_placanja = nacin_placanja;
-        this.iznos_racuna = iznos_racuna;
         this.vrstaRacuna = vrstaRacuna;
     }
 
@@ -122,14 +137,23 @@ public class Racun extends Entitet implements Serializable{
         this.nacin_placanja = nacin_placanja;
     }
 
-    public Double getIznos_racuna() {
-        return iznos_racuna;
+    public BigDecimal getIznos_racuna() {
+        
+        BigDecimal ukupno = BigDecimal.ZERO;
+        double stavkaIznos;
+        for (Stavka s : stavke) {
+             stavkaIznos = s.getKolicina() * s.getProizvod().getCijena();
+            ukupno = ukupno.add(new BigDecimal(stavkaIznos));
+        }
+
+
+        
+        
+        
+        return ukupno;
     }
 
-    public void setIznos_racuna(Double iznos_racuna) {
-        this.iznos_racuna = iznos_racuna;
-    }
-    
+  
 
     
    

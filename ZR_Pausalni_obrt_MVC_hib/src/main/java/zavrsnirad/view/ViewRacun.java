@@ -5,8 +5,12 @@
  */
 package zavrsnirad.view;
 
+import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.table.DefaultTableModel;
+import zavrsnirad.controller.ObradaStavka;
 import zavrsnirad.model.Racun;
+import zavrsnirad.model.Stavka;
 
 /**
  *
@@ -15,6 +19,7 @@ import zavrsnirad.model.Racun;
 public class ViewRacun extends javax.swing.JFrame {
     private ViewGlavni glavni;
     private Racun r;
+    private ObradaStavka obrada;
     /**
      * Creates new form ViewRacun
      */
@@ -27,6 +32,7 @@ public class ViewRacun extends javax.swing.JFrame {
         group.add(rbtUslugeDomaci);
         group.add(rbtUslugeInozemni);
         ucitajRacun();
+        
     }
     private void ucitajRacun(){
         txtBrojRacuna.setText(r.getBroj_racuna());
@@ -37,7 +43,26 @@ public class ViewRacun extends javax.swing.JFrame {
         txtNacinPlacanja.setText(r.getNacin_placanja());
         txtVrijemeIzdavanja.setText(r.getDatum_izdavanja().toString());
         txtfNapomena.setText(r.getNapomena());
+        
+        DefaultTableModel dtm=(DefaultTableModel)tblStavke.getModel();
+        List<Stavka> stavke=r.getStavke();
+        for(Stavka s:stavke){
+            Object []red={
+                s.getProizvod().getNaziv(),
+                s.getProizvod().getJedinica_mjere(),
+                s.getProizvod().getCijena().toString(),
+                s.getKolicina(),
+                s.getRabat(),
+                s.getIznosStavke()
+               
+                
+            };
+            dtm.addRow(red);
+        }
+        lblUkupno.setText(r.getIznos_racuna().toString());
+        
     }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,13 +99,13 @@ public class ViewRacun extends javax.swing.JFrame {
         rbtRobaInozemni = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblStavke = new javax.swing.JTable();
         btnSpremi = new javax.swing.JButton();
         btnSpremiIIspisi = new javax.swing.JButton();
         btnIIspisi = new javax.swing.JButton();
         btnObrisi1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txtUkupanIznos = new javax.swing.JTextField();
+        lblUkupno = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -144,30 +169,23 @@ public class ViewRacun extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Stavke ..."));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblStavke.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Naziv", "Opis", "jed.mj.", "Cijena", "Količina", "Rabat", "Iznos"
+                "Naziv", "jed.mj.", "Cijena", "Količina", "Rabat", "Iznos"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, false
+                false, false, false, true, true, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tblStavke);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,8 +199,8 @@ public class ViewRacun extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         btnSpremi.setText("Spremi");
@@ -214,14 +232,10 @@ public class ViewRacun extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("UKUPNO");
+        jLabel9.setText("UKUPNO:");
 
-        txtUkupanIznos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txtUkupanIznos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUkupanIznosActionPerformed(evt);
-            }
-        });
+        lblUkupno.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblUkupno.setText("0,00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,16 +273,32 @@ public class ViewRacun extends javax.swing.JFrame {
                                     .addComponent(txtVrijemeIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtKupac, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtBrojRacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSpremiIIspisi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnIIspisi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(26, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnObrisi1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSpremiIIspisi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnIIspisi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(lblUkupno)))
+                                .addGap(51, 51, 51))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,19 +308,8 @@ public class ViewRacun extends javax.swing.JFrame {
                                         .addGap(41, 41, 41)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(rbtRobaInozemni)
-                                            .addComponent(rbtRobaDomaci)))))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnObrisi1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                            .addComponent(rbtRobaDomaci))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,26 +353,23 @@ public class ViewRacun extends javax.swing.JFrame {
                             .addComponent(rbtUslugeInozemni)
                             .addComponent(rbtRobaInozemni)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblUkupno)
+                        .addComponent(jLabel9)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSpremi)
                             .addComponent(btnSpremiIIspisi)
-                            .addComponent(btnSpremi))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnIIspisi)
-                            .addComponent(btnObrisi1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(405, 405, 405))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnIIspisi))
+                        .addGap(9, 9, 9)
+                        .addComponent(btnObrisi1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -369,8 +385,8 @@ public class ViewRacun extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -409,10 +425,6 @@ public class ViewRacun extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnObrisi1ActionPerformed
 
-    private void txtUkupanIznosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUkupanIznosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUkupanIznosActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -439,18 +451,18 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblUkupno;
     private javax.swing.JRadioButton rbtRobaDomaci;
     private javax.swing.JRadioButton rbtRobaInozemni;
     private javax.swing.JRadioButton rbtUslugeDomaci;
     private javax.swing.JRadioButton rbtUslugeInozemni;
+    private javax.swing.JTable tblStavke;
     private javax.swing.JTextField txtBrojRacuna;
     private javax.swing.JTextField txtDatumDospijeca;
     private javax.swing.JTextField txtDatumIsporuke;
     private javax.swing.JTextField txtIzdaoKorisnik;
     private javax.swing.JTextField txtKupac;
     private javax.swing.JTextField txtNacinPlacanja;
-    private javax.swing.JTextField txtUkupanIznos;
     private javax.swing.JTextField txtVrijemeIzdavanja;
     private javax.swing.JTextArea txtfNapomena;
     // End of variables declaration//GEN-END:variables

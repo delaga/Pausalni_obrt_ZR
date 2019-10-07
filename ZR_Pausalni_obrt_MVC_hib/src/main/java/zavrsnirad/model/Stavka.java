@@ -23,6 +23,20 @@ public class Stavka extends Entitet implements Serializable {
     private Racun racun;
     private double rabat;
     private double kolicina;
+    private double iznosStavke;
+
+    public double getIznosStavke() {
+        Double iznosStavke = getKolicina() * getProizvod().getCijena();
+        return iznosStavke;
+    }
+
+    public void setIznosStavke(double iznosStavke) {
+        this.iznosStavke = iznosStavke;
+    }
+
+    
+
+    
 
     public Stavka() {
         super();
