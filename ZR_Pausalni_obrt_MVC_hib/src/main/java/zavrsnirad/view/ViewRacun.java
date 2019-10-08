@@ -31,7 +31,12 @@ public class ViewRacun extends javax.swing.JFrame {
         group.add(rbtRobaInozemni);
         group.add(rbtUslugeDomaci);
         group.add(rbtUslugeInozemni);
-        ucitajRacun();
+        if(r.getId()==null){
+            
+        }else{
+            ucitajRacun();
+        }
+        
         
     }
     private void ucitajRacun(){

@@ -1,5 +1,6 @@
-usluge za domaće klijente 	Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
-usluge za inozemne klijente 	Oslobođeno PDV-a temeljem članka 17. Zakona o PDV-u - reverse charge 
-roba za domaće klijente 	Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
-roba za inozemne klijente 	Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
+treba još napraviti ....
+1.ViewRacun->Stavke:dodavanje, uklanjane,promjena
+           ->Spremi
+           ->Ispiši
+           ->obriši
 
