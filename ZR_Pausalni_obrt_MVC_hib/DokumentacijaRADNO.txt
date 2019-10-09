@@ -4,3 +4,4 @@ treba još napraviti ....
            ->Ispiši
            ->obriši
 
+2. Exporti: Excell ->https://plaviured.hr/documents/izrada-racuna-pausal-2019.xlsx
