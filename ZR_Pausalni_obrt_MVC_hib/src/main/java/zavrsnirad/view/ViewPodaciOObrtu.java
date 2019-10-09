@@ -5,8 +5,11 @@
  */
 package zavrsnirad.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import zavrsnirad.controller.ObradaPodaciOObrtu;
 import zavrsnirad.model.PodaciOObrtu;
+import zavrsnirad.utility.DelagaException;
 import zavrsnirad.utility.HibernateUtil;
 
 /**
@@ -15,23 +18,13 @@ import zavrsnirad.utility.HibernateUtil;
  */
 public class ViewPodaciOObrtu extends javax.swing.JFrame {
     private ObradaPodaciOObrtu obrada;
+    private PodaciOObrtu pod;
     /**
      * Creates new form ViewPodaciOObrtu
      */
     public ViewPodaciOObrtu() {
         initComponents();
-        obrada=new ObradaPodaciOObrtu();
-        PodaciOObrtu pod=HibernateUtil.getSession().get(PodaciOObrtu.class, 1);
-        txtNaziv.setText(pod.getNaziv());
-        txtAdresa.setText(pod.getAdresa());
-        txtBanka.setText(pod.getBanka());
-        txtDjelatnost.setText(pod.getDjelatnost());
-        txtEmail.setText(pod.getEmail());
-        txtIBAN.setText(pod.getIban());
-        txtLogo.setText(pod.getLogo_url());
-        txtMobitel.setText(pod.getTelefon_mobitel());
-        txtOIB.setText(pod.getOib());
-        txtVlasnik.setText(pod.getVlasnik());
+        ucitaj();
     }
 
     /**
@@ -169,6 +162,11 @@ public class ViewPodaciOObrtu extends javax.swing.JFrame {
         );
 
         btnSpremi.setText("Spremi");
+        btnSpremi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpremiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,6 +194,25 @@ public class ViewPodaciOObrtu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
+        
+        pod.setNaziv(txtNaziv.getText());
+        pod.setVlasnik(txtVlasnik.getText());
+        pod.setAdresa(txtAdresa.getText());
+        pod.setBanka(txtBanka.getText());
+        pod.setDjelatnost(txtDjelatnost.getText());
+        pod.setEmail(txtEmail.getText());
+        pod.setIban(txtIBAN.getText());
+        pod.setLogo_url(txtLogo.getText());
+        pod.setOib(txtOIB.getText());
+        pod.setTelefon_mobitel(txtMobitel.getText());
+        try {
+            obrada.spremi(pod);
+                    } catch (DelagaException ex) {
+            Logger.getLogger(ViewPodaciOObrtu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSpremiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,4 +243,19 @@ public class ViewPodaciOObrtu extends javax.swing.JFrame {
     private javax.swing.JTextField txtOIB;
     private javax.swing.JTextField txtVlasnik;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitaj() {
+        obrada=new ObradaPodaciOObrtu();
+        PodaciOObrtu pod=HibernateUtil.getSession().get(PodaciOObrtu.class, 1);
+        txtNaziv.setText(pod.getNaziv());
+        txtAdresa.setText(pod.getAdresa());
+        txtBanka.setText(pod.getBanka());
+        txtDjelatnost.setText(pod.getDjelatnost());
+        txtEmail.setText(pod.getEmail());
+        txtIBAN.setText(pod.getIban());
+        txtLogo.setText(pod.getLogo_url());
+        txtMobitel.setText(pod.getTelefon_mobitel());
+        txtOIB.setText(pod.getOib());
+        txtVlasnik.setText(pod.getVlasnik());
+    }
 }

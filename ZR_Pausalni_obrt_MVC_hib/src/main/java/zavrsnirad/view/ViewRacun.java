@@ -606,7 +606,9 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSpremiIIspisiActionPerformed
 
     private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
-        // TODO add your handling code here:
+        //provjera da li racun postoji
+        //upozori ako je isti broj
+        //ako nije spremi ga sa novim brojem
     }//GEN-LAST:event_btnSpremiActionPerformed
 
     private void tblStavkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStavkeMouseClicked

@@ -22,7 +22,7 @@ public class ObradaPodaciOObrtu extends Obrada<PodaciOObrtu>{
     
     @Override
     protected void kontrolaSpremi(PodaciOObrtu entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
