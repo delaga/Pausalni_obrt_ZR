@@ -62,6 +62,7 @@ public class ViewGlavni extends javax.swing.JFrame {
         tblRacuni = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnKalkulator = new javax.swing.JButton();
+        btnTecajnaLista = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnKnjigaPrometa = new javax.swing.JButton();
         btnPOSD = new javax.swing.JButton();
@@ -203,20 +204,31 @@ public class ViewGlavni extends javax.swing.JFrame {
             }
         });
 
+        btnTecajnaLista.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnTecajnaLista.setText("Tečajna lista");
+        btnTecajnaLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTecajnaListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnKalkulator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnKalkulator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTecajnaLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnKalkulator, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(btnKalkulator)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTecajnaLista))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Generiraj ..."));
@@ -291,12 +303,10 @@ public class ViewGlavni extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,6 +453,10 @@ private void ucitaj() {
             new ViewRacun(r).setVisible(true);
         }
     }//GEN-LAST:event_tblRacuniMouseClicked
+
+    private void btnTecajnaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTecajnaListaActionPerformed
+        new ViewTecajnaLista().setVisible(true);
+    }//GEN-LAST:event_btnTecajnaListaActionPerformed
     private class Vrijeme extends Thread {
 
         SimpleDateFormat vrijemeFormat = new SimpleDateFormat(Utils.getFormatDatumaIVremena());
@@ -473,6 +487,7 @@ private void ucitaj() {
     private javax.swing.JButton btnObriši;
     private javax.swing.JButton btnPOSD;
     private javax.swing.JButton btnProizvodiUsluge;
+    private javax.swing.JButton btnTecajnaLista;
     private javax.swing.JButton btnUredi;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemDBserver;
