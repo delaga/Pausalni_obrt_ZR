@@ -26,6 +26,12 @@ public class Usluga_proizvod extends Entitet implements Serializable{
         super();
     }
 
+    @Override
+    public String toString() {
+        //return "Usluga_proizvod{" + "naziv=" + naziv + '}';
+        return  naziv;
+    }
+
     public Usluga_proizvod(String naziv, String opis, String jedinica_mjere, Double cijena, Integer Id, Date vrijemeKreiranja, Date vrijemePromjene) {
         super(Id, vrijemeKreiranja, vrijemePromjene);
         this.naziv = naziv;

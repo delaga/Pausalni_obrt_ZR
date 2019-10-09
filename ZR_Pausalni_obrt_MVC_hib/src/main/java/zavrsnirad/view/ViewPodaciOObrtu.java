@@ -24,6 +24,8 @@ public class ViewPodaciOObrtu extends javax.swing.JFrame {
      */
     public ViewPodaciOObrtu() {
         initComponents();
+        
+        obrada=new ObradaPodaciOObrtu();
         ucitaj();
     }
 
@@ -245,8 +247,8 @@ public class ViewPodaciOObrtu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void ucitaj() {
-        obrada=new ObradaPodaciOObrtu();
-        PodaciOObrtu pod=HibernateUtil.getSession().get(PodaciOObrtu.class, 1);
+        
+        pod=obrada.getEntitet();
         txtNaziv.setText(pod.getNaziv());
         txtAdresa.setText(pod.getAdresa());
         txtBanka.setText(pod.getBanka());

@@ -8,6 +8,7 @@ package zavrsnirad.controller;
 import java.util.List;
 import zavrsnirad.model.PodaciOObrtu;
 import zavrsnirad.utility.DelagaException;
+import zavrsnirad.utility.HibernateUtil;
 
 /**
  *
@@ -33,6 +34,10 @@ public class ObradaPodaciOObrtu extends Obrada<PodaciOObrtu>{
     @Override
     public List<PodaciOObrtu> getEntiteti() {
         return session.createQuery("from PodaciOObrtu").list();
+    }
+    
+    public PodaciOObrtu getEntitet(){
+        return HibernateUtil.getSession().get(PodaciOObrtu.class, 1);
     }
     
 }

@@ -396,6 +396,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Obrazac PO-SD (XLS)"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPOSDActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import zavrsnirad.controller.ObradaStavka;
 import zavrsnirad.controller.ObradaUsluga_proizvod;
 import zavrsnirad.model.Racun;
@@ -26,20 +27,22 @@ public class ViewRacun extends javax.swing.JFrame {
     /**
      * Creates new form ViewRacun
      */
-    public ViewRacun(Racun r) {
+    public ViewRacun(ViewGlavni r) {
         initComponents();
-        this.r=r;
+        this.glavni=r;
+        this.r=glavni.getOdabraniRacun();
         ButtonGroup group=new ButtonGroup();
         group.add(rbtRobaDomaci);
         group.add(rbtRobaInozemni);
         group.add(rbtUslugeDomaci);
         group.add(rbtUslugeInozemni);
-        if(r.getId()==null){
+        if(this.r.getId()==null){
             
         }else{
             ucitajRacun();
         }
         
+        ucitajUsluge();
         
     }
     private void ucitajRacun(){
@@ -54,8 +57,21 @@ public class ViewRacun extends javax.swing.JFrame {
         
         DefaultTableModel dtm=(DefaultTableModel)tblStavke.getModel();
         List<Stavka> stavke=r.getStavke();
+        String[] colNames = {"objekt", "Naziv", "Jed. mj.", "Cijena", "Kolićina", "Rabat", "Iznos"};
+         for (int i = 0; i < colNames.length; i++) {
+            
+            TableColumn tc = tblStavke.getColumnModel().getColumn(i);
+            tc.setHeaderValue(colNames[i]);
+            if (i == 0) {
+                tc.setWidth(0);
+                tc.setMinWidth(0);
+                tc.setMaxWidth(0);
+            }
+        }
         for(Stavka s:stavke){
+            
             Object []red={
+                s,
                 s.getProizvod().getNaziv(),
                 s.getProizvod().getJedinica_mjere(),
                 s.getProizvod().getCijena().toString(),
@@ -143,6 +159,8 @@ public class ViewRacun extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1300, 539));
+        setSize(new java.awt.Dimension(1300, 539));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Račun ..."));
 
@@ -202,11 +220,11 @@ public class ViewRacun extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Naziv", "jed.mj.", "Cijena", "Količina", "Rabat", "Iznos"
+                "Stavka", "Naziv", "jed.mj.", "Cijena", "Količina", "Rabat", "Iznos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, false
+                false, false, false, false, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -590,7 +608,10 @@ public class ViewRacun extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStavkaDodajActionPerformed
 
     private void comStavkaNazivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comStavkaNazivActionPerformed
-        // TODO add your handling code here:
+        Usluga_proizvod p=(Usluga_proizvod) comStavkaNaziv.getSelectedItem();
+        txtStavkaCijena.setText(p.getCijena().toString());
+        txtStavkaJedinicaMjere.setText(p.getJedinica_mjere());
+        txtStavkaOpis.setText(p.getOpis());
     }//GEN-LAST:event_comStavkaNazivActionPerformed
 
     private void btnObrisi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisi1ActionPerformed
@@ -609,11 +630,25 @@ public class ViewRacun extends javax.swing.JFrame {
         //provjera da li racun postoji
         //upozori ako je isti broj
         //ako nije spremi ga sa novim brojem
+        
+        
+        //na kraju
+        glavni.ucitaj();
+        dispose();
     }//GEN-LAST:event_btnSpremiActionPerformed
 
     private void tblStavkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStavkeMouseClicked
+        
+         
         Stavka s = (Stavka) tblStavke.getValueAt(tblStavke.getSelectedRow(), 0);
-        comStavkaNaziv.setSelectedItem(s.getProizvod().getNaziv());
+        //System.out.println(tblStavke.getValueAt(tblStavke.getSelectedRow(), 0));
+        //comStavkaNaziv.setSelectedItem(s.getProizvod().getNaziv());
+        comStavkaNaziv.setSelectedIndex(s.getId());
+        txtStavkaCijena.setText(s.getProizvod().getCijena().toString());
+        txtStavkaJedinicaMjere.setText(s.getProizvod().getJedinica_mjere());
+        spnStavkaKolicina.setValue(s.getKolicina());
+        txtStavkaOpis.setText(s.getProizvod().getOpis());
+        txtStavkaIznos.setText(""+s.getIznosStavke());
     }//GEN-LAST:event_tblStavkeMouseClicked
 
     private void rbtRobaInozemniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtRobaInozemniActionPerformed
@@ -710,4 +745,19 @@ public class ViewRacun extends javax.swing.JFrame {
     private javax.swing.JTextField txtUkupno;
     private javax.swing.JTextArea txtfNapomena;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitajUsluge() {
+        DefaultComboBoxModel<Usluga_proizvod> m = new DefaultComboBoxModel<>();
+        Usluga_proizvod pr = new Usluga_proizvod();
+        pr.setId(0);
+        pr.setNaziv("Odaberite");
+        m.addElement(pr);
+
+        new ObradaUsluga_proizvod().getEntiteti().forEach((p) -> {
+            m.addElement(p);
+        });
+        comStavkaNaziv.setModel(m);
+        
+        
+    }
 }

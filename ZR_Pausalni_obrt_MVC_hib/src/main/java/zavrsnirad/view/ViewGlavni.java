@@ -5,6 +5,9 @@
  */
 package zavrsnirad.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +16,11 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.poi.hssf.util.CellReference;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.Session;
 import zavrsnirad.controller.ObradaRacun;
 import zavrsnirad.model.Klijent_kupac;
@@ -24,8 +32,13 @@ import zavrsnirad.utility.Utils;
  * @author mirza
  */
 public class ViewGlavni extends javax.swing.JFrame {
-
+    
     private ObradaRacun obrada;
+    private Racun odabraniRacun;
+    
+    public Racun getOdabraniRacun() {
+        return odabraniRacun;
+    }
 
     /**
      * Creates new form Glavni
@@ -36,7 +49,7 @@ public class ViewGlavni extends javax.swing.JFrame {
         tblRacuni.setDefaultEditor(Object.class, null);
         obrada = new ObradaRacun();
         ucitaj();
-
+        
     }
 
     /**
@@ -236,6 +249,11 @@ public class ViewGlavni extends javax.swing.JFrame {
         btnKnjigaPrometa.setText("Knjiga prometa (XLS)");
 
         btnPOSD.setText("Obrazac PO-SD (XLS)");
+        btnPOSD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPOSDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -325,14 +343,14 @@ public class ViewGlavni extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-private void ucitaj() {
+public void ucitaj() {
         SimpleDateFormat df = new SimpleDateFormat("dd. MM. yyyy.");
         DefaultTableModel dtm = (DefaultTableModel) tblRacuni.getModel();
         List<Racun> racuni = obrada.getEntiteti();
         String[] colNames = {"objekt", "Broj računa", "Klijent/Kupac", "Datum izdavanja", "Datum dospiječa", "Datum isporuke", "Iznos", "Način plačanja", "Izdao", "Napomena"};
-
+        
         for (int i = 0; i < colNames.length; i++) {
-
+            
             TableColumn tc = tblRacuni.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
             if (i == 0) {
@@ -341,7 +359,7 @@ private void ucitaj() {
                 tc.setMaxWidth(0);
             }
         }
-
+        
         racuni.forEach((r) -> {
             try {
                 Object red[] = {
@@ -355,9 +373,9 @@ private void ucitaj() {
                     r.getNacin_placanja(),
                     r.getKorisnik().getPrezime(),
                     r.getNapomena(),};
-
+                
                 dtm.addRow(red);
-
+                
             } catch (Exception e) {
                 String red[] = {
                     "aaaa",
@@ -367,7 +385,7 @@ private void ucitaj() {
                 };
                 dtm.addRow(red);
             }
-
+            
         });
 
 //        String[] colNames = {"Broj računa", "Klijent/Kupac", "Datum izdavanja","Datum dospiječa","Datum isporuke","Iznos","Način plačanja","Izdao","Napomena"};
@@ -399,7 +417,7 @@ private void ucitaj() {
 //        lista.setModel(model);
 //        lista.repaint();
     }
-
+    
     @Override
     public void list() {
         super.list(); //To change body of generated methods, choose Tools | Templates.
@@ -429,15 +447,16 @@ private void ucitaj() {
     }//GEN-LAST:event_jMenuKorisniciActionPerformed
 
     private void btnNoviRačunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviRačunActionPerformed
-        Racun r = new Racun();
-        new ViewRacun(r).setVisible(true);
+        odabraniRacun = new Racun();
+        new ViewRacun(this).setVisible(true);
     }//GEN-LAST:event_btnNoviRačunActionPerformed
+    
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
-
-        Racun r = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
-        new ViewRacun(r).setVisible(true);
-
+        
+        odabraniRacun = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+        new ViewRacun(this).setVisible(true);
+        
 
     }//GEN-LAST:event_btnUrediActionPerformed
 
@@ -448,30 +467,53 @@ private void ucitaj() {
     private void tblRacuniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRacuniMouseClicked
         if (evt.getClickCount() == 2) {
             //System.out.println(tblRacuni.getSelectedRow());
-            Racun r = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
+            odabraniRacun = (Racun) tblRacuni.getValueAt(tblRacuni.getSelectedRow(), 0);
             // System.out.println(oznaceni.getId());
-            new ViewRacun(r).setVisible(true);
+            new ViewRacun(this).setVisible(true);
         }
     }//GEN-LAST:event_tblRacuniMouseClicked
 
     private void btnTecajnaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTecajnaListaActionPerformed
         new ViewTecajnaLista().setVisible(true);
     }//GEN-LAST:event_btnTecajnaListaActionPerformed
+
+    private void btnPOSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPOSDActionPerformed
+        String nazivDatoteke = "Book1.xlsx";
+        try {
+            XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(new File(nazivDatoteke)));
+            Sheet s = wb.getSheetAt(0);
+            CellReference cr = new CellReference("A7");
+            Row r = s.getRow(cr.getRow());
+            Cell c = r.getCell(cr.getCol());
+            // System.out.println(c.getStringCellValue());
+            c.setCellValue(58);
+            c.setCellFormula("");
+            
+            FileOutputStream out = new FileOutputStream(nazivDatoteke);
+            wb.write(out);
+            out.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+    }//GEN-LAST:event_btnPOSDActionPerformed
     private class Vrijeme extends Thread {
-
+        
         SimpleDateFormat vrijemeFormat = new SimpleDateFormat(Utils.getFormatDatumaIVremena());
-
+        
         @Override
         public void run() {
             lblTime.setText(vrijemeFormat.format(new Date()));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-
+                
             }
             run();
         }
-
+        
     }
     /**
      * @param args the command line arguments
