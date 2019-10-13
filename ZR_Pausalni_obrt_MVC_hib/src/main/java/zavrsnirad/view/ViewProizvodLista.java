@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import zavrsnirad.controller.ObradaUsluga_proizvod;
 import zavrsnirad.model.Usluga_proizvod;
+import zavrsnirad.utility.DelagaException;
 
 /**
  *
@@ -19,13 +20,19 @@ import zavrsnirad.model.Usluga_proizvod;
 public class ViewProizvodLista extends javax.swing.JFrame {
 
     private ObradaUsluga_proizvod obrada;
+    private Usluga_proizvod odabranaUslugaProizvod;
+
+    public Usluga_proizvod getOdabranaUslugaProizvod() {
+        return odabranaUslugaProizvod;
+    }
 
     /**
      * Creates new form ViewProizvodLista
      */
     public ViewProizvodLista() {
         initComponents();
-        obrada=new ObradaUsluga_proizvod();
+        tblProizvodiUsluge.setDefaultEditor(Object.class, null);
+        obrada = new ObradaUsluga_proizvod();
         ucitaj();
     }
 
@@ -38,10 +45,17 @@ public class ViewProizvodLista extends javax.swing.JFrame {
 
             TableColumn tc = tblProizvodiUsluge.getColumnModel().getColumn(i);
             tc.setHeaderValue(colNames[i]);
+            if (i == 0) {
+                tc.setWidth(0);
+                tc.setMinWidth(0);
+                tc.setMaxWidth(0);
+
+            }
         }
         kupci.forEach((pu) -> {
             try {
-                String red[] = {
+                Object red[] = {
+                    pu,
                     pu.getNaziv(),
                     pu.getOpis(),
                     pu.getJedinica_mjere(),
@@ -116,8 +130,18 @@ public class ViewProizvodLista extends javax.swing.JFrame {
         });
 
         btnUredi.setText("Uredi");
+        btnUredi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUrediActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,8 +178,24 @@ public class ViewProizvodLista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviActionPerformed
-        new ViewProizvodUsluga().setVisible(true);
+        odabranaUslugaProizvod = new Usluga_proizvod();
+        new ViewProizvodUsluga(this).setVisible(true);
     }//GEN-LAST:event_btnNoviActionPerformed
+
+    private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
+        odabranaUslugaProizvod = (Usluga_proizvod) tblProizvodiUsluge.getValueAt(tblProizvodiUsluge.getSelectedRow(), 0);
+        new ViewProizvodUsluga(this).setVisible(true);
+    }//GEN-LAST:event_btnUrediActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        odabranaUslugaProizvod = (Usluga_proizvod) tblProizvodiUsluge.getValueAt(tblProizvodiUsluge.getSelectedRow(), 0);
+        try {
+            obrada.brisi(odabranaUslugaProizvod);
+        } catch (DelagaException e) {
+            
+        }
+        
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**
      * @param args the command line arguments

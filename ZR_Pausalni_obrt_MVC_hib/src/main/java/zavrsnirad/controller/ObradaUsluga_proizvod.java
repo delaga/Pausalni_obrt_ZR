@@ -24,17 +24,26 @@ public class ObradaUsluga_proizvod extends Obrada<Usluga_proizvod>{
 
     @Override
     protected void kontrolaSpremi(Usluga_proizvod entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        kontrolaNaziv(entitet);
     }
 
     @Override
     protected void kontrolaBrisi(Usluga_proizvod entitet) throws DelagaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        kontrolaBrisi(entitet);
     }
 
     @Override
     public List<Usluga_proizvod> getEntiteti() {
         return session.createQuery("from Usluga_proizvod").list();
+    }
+
+    private void kontrolaNaziv(Usluga_proizvod entitet) throws DelagaException{
+         if(entitet.getNaziv().trim().length()==0){
+            throw new DelagaException("Naziv obavezno");
+        }
+        if(entitet.getNaziv().trim().length()>255){
+            throw new DelagaException("Naziv predugačak");
+        }
     }
     
 }

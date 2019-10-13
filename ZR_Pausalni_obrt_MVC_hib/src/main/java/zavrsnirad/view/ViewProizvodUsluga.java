@@ -5,17 +5,41 @@
  */
 package zavrsnirad.view;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import zavrsnirad.controller.ObradaUsluga_proizvod;
+import zavrsnirad.model.Usluga_proizvod;
+import zavrsnirad.utility.DelagaException;
+
 /**
  *
  * @author mirza
  */
 public class ViewProizvodUsluga extends javax.swing.JFrame {
+    private ObradaUsluga_proizvod obrada;
+    private ViewProizvodLista listaUslugaProizvoda;
+    private Usluga_proizvod up;
+    
 
     /**
      * Creates new form ProizvodUsluga
      */
-    public ViewProizvodUsluga() {
+    public ViewProizvodUsluga(ViewProizvodLista up) {
         initComponents();
+        this.listaUslugaProizvoda=up;
+        this.up=listaUslugaProizvoda.getOdabranaUslugaProizvod();
+        obrada=new ObradaUsluga_proizvod();
+        if(this.up.getId()==null){
+        
+        }else{
+            ucitajUsluguProizvod();
+        }
     }
 
     /**
@@ -40,7 +64,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
         txtJedinicnaMjera = new javax.swing.JTextField();
         txtCijena = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtOpis = new javax.swing.JTextArea();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Proizvod / Usluga"));
 
@@ -88,9 +112,9 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
 
         jLabel4.setText("Cijena:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtOpis.setColumns(20);
+        txtOpis.setRows(5);
+        jScrollPane1.setViewportView(txtOpis);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -174,15 +198,42 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        // TODO add your handling code here:
+        Usluga_proizvod up=new Usluga_proizvod();
+        spremi(up);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
-        // TODO add your handling code here:
+        
+        
+        
     }//GEN-LAST:event_btnUrediActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        // TODO add your handling code here:
+       Usluga_proizvod up=listaUslugaProizvoda.getOdabranaUslugaProizvod();
+       if(up==null){
+            JOptionPane.showMessageDialog(null, "Prvo odaberite Uslugu ili Proizvod");
+            return;
+
+        }
+        
+        if(JOptionPane.showConfirmDialog(
+            null, //roditelj, bude null
+            "Sigurno obrisati " + up.getNaziv(), //tijelo dijaloga
+            "Brisanje proizvoda ili usluge", // naslov
+            JOptionPane.YES_NO_OPTION, //vrsta opcija
+            JOptionPane.QUESTION_MESSAGE) //ikona
+        ==JOptionPane.NO_OPTION){
+        return;
+        }
+
+        try {
+            obrada.brisi(up);
+        } catch (DelagaException ex) {
+            JOptionPane.showMessageDialog(null, ex.getPoruka());
+            return;
+        }
+
+        
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**
@@ -201,9 +252,33 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtCijena;
     private javax.swing.JTextField txtJedinicnaMjera;
     private javax.swing.JTextField txtNaziv;
+    private javax.swing.JTextArea txtOpis;
     // End of variables declaration//GEN-END:variables
+
+    private void spremi(Usluga_proizvod up) {
+        
+        up.setNaziv(txtNaziv.getText());
+        up.setCijena(Double.parseDouble(txtCijena.getText()));
+              
+        up.setJedinica_mjere(txtJedinicnaMjera.getText());
+        up.setOpis(txtOpis.getText());
+        up.setVrijemeKreiranja(Date.valueOf(LocalDate.now()));
+        up.setVrijemePromjene(Date.valueOf(LocalDate.now()));
+        try {
+            obrada.spremi(up);
+        } catch (DelagaException ex) {
+            Logger.getLogger(ViewProizvodUsluga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    private void ucitajUsluguProizvod() {
+        txtNaziv.setText(up.getNaziv());
+        txtCijena.setText(up.getCijena().toString());
+        txtJedinicnaMjera.setText(up.getJedinica_mjere());
+        txtOpis.setText(up.getOpis());
+    }
 }

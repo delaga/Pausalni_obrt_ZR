@@ -31,7 +31,7 @@ public class Stavka extends Entitet implements Serializable {
     }
 
     public double getIznosStavke() {
-        Double iznosStavke = getKolicina() * getProizvod().getCijena();
+        Double iznosStavke = getKolicina() * getProizvod().getCijena()*((100-getRabat())/100);
         return iznosStavke;
     }
 
