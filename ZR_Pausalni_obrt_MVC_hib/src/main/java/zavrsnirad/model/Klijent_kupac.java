@@ -18,6 +18,11 @@ import javax.persistence.Id;
 public class Klijent_kupac extends Entitet implements Serializable{
        
         private String naziv;
+
+    @Override
+    public String toString() {
+        return  naziv ;
+    }
 	private String adresa;
 	private String post_broj;
 	private String grad;
