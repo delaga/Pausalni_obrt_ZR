@@ -217,7 +217,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         Korisnik k= new Korisnik();
         k.setIme(txtIme.getText());
-        k.setPrezime(txtPrbtnSpremitText());
+        k.setPrezime(txtPrezime.getText());
         k.setEmail(txtEmail.getText());
         k.setLozinka(BCrypt.hashpw(pswLozinka.toString(), BCrypt.gensalt()));
         if(rbAdmin.isSelected()) k.isAdmin();
