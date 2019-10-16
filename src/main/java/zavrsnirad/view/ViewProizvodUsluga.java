@@ -53,8 +53,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnDodaj = new javax.swing.JButton();
-        btnUredi = new javax.swing.JButton();
-        btnObrisi = new javax.swing.JButton();
+        btnSpremi = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -88,17 +87,10 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
             }
         });
 
-        btnUredi.setText("Uredi");
-        btnUredi.addActionListener(new java.awt.event.ActionListener() {
+        btnSpremi.setText("Spremi");
+        btnSpremi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUrediActionPerformed(evt);
-            }
-        });
-
-        btnObrisi.setText("Obriši");
-        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
+                btnSpremiActionPerformed(evt);
             }
         });
 
@@ -172,12 +164,10 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(55, 55, 55)
                 .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUredi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,8 +178,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUredi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -202,39 +191,11 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
         spremi(up);
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
+    private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
         
         
         
-    }//GEN-LAST:event_btnUrediActionPerformed
-
-    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-       Usluga_proizvod up=listaUslugaProizvoda.getOdabranaUslugaProizvod();
-       if(up==null){
-            JOptionPane.showMessageDialog(null, "Prvo odaberite Uslugu ili Proizvod");
-            return;
-
-        }
-        
-        if(JOptionPane.showConfirmDialog(
-            null, //roditelj, bude null
-            "Sigurno obrisati " + up.getNaziv(), //tijelo dijaloga
-            "Brisanje proizvoda ili usluge", // naslov
-            JOptionPane.YES_NO_OPTION, //vrsta opcija
-            JOptionPane.QUESTION_MESSAGE) //ikona
-        ==JOptionPane.NO_OPTION){
-        return;
-        }
-
-        try {
-            obrada.brisi(up);
-        } catch (DelagaException ex) {
-            JOptionPane.showMessageDialog(null, ex.getPoruka());
-            return;
-        }
-
-        
-    }//GEN-LAST:event_btnObrisiActionPerformed
+    }//GEN-LAST:event_btnSpremiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,8 +204,7 @@ public class ViewProizvodUsluga extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JButton btnObrisi;
-    private javax.swing.JButton btnUredi;
+    private javax.swing.JButton btnSpremi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

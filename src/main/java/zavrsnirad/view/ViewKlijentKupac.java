@@ -52,8 +52,7 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
         txtOibJmbg = new JTextField();
         jLabel6 = new JLabel();
         btnDodaj = new JButton();
-        btnUredi = new JButton();
-        btnObrisi = new JButton();
+        btnSpremi = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -178,17 +177,10 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
             }
         });
 
-        btnUredi.setText("Uredi");
-        btnUredi.addActionListener(new ActionListener() {
+        btnSpremi.setText("Spremi");
+        btnSpremi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                btnUrediActionPerformed(evt);
-            }
-        });
-
-        btnObrisi.setText("Obriši");
-        btnObrisi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
+                btnSpremiActionPerformed(evt);
             }
         });
 
@@ -200,12 +192,10 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
                 .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(117, 117, 117)
                 .addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUredi, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSpremi, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -215,8 +205,7 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUredi, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnObrisi, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSpremi, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -252,13 +241,9 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void btnUrediActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
+    private void btnSpremiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUrediActionPerformed
-
-    private void btnObrisiActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnObrisiActionPerformed
+    }//GEN-LAST:event_btnSpremiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,8 +252,7 @@ public class ViewKlijentKupac extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnDodaj;
-    private JButton btnObrisi;
-    private JButton btnUredi;
+    private JButton btnSpremi;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;

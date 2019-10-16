@@ -38,8 +38,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
 
         btngVrstaKorisnika = new javax.swing.ButtonGroup();
         btnDodaj = new javax.swing.JButton();
-        btnUredi = new javax.swing.JButton();
-        btnObrisi = new javax.swing.JButton();
+        btnSpremi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIme = new javax.swing.JTextField();
@@ -67,17 +66,10 @@ public class ViewKorisnik extends javax.swing.JFrame {
             }
         });
 
-        btnUredi.setText("Uredi");
-        btnUredi.addActionListener(new java.awt.event.ActionListener() {
+        btnSpremi.setText("Spremi");
+        btnSpremi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUrediActionPerformed(evt);
-            }
-        });
-
-        btnObrisi.setText("Obriši");
-        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiActionPerformed(evt);
+                btnSpremiActionPerformed(evt);
             }
         });
 
@@ -199,14 +191,12 @@ public class ViewKorisnik extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
                 .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUredi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,8 +206,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUredi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSpremi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,7 +217,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         Korisnik k= new Korisnik();
         k.setIme(txtIme.getText());
-        k.setPrezime(txtPrezime.getText());
+        k.setPrezime(txtPrbtnSpremitText());
         k.setEmail(txtEmail.getText());
         k.setLozinka(BCrypt.hashpw(pswLozinka.toString(), BCrypt.gensalt()));
         if(rbAdmin.isSelected()) k.isAdmin();
@@ -243,13 +232,9 @@ public class ViewKorisnik extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void btnUrediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUrediActionPerformed
+    private void btnSpremiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpremiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUrediActionPerformed
-
-    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnObrisiActionPerformed
+    }//GEN-LAST:event_btnSpremiActionPerformed
 
     private void rbKorisnikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKorisnikActionPerformed
         // TODO add your handling code here:
@@ -262,8 +247,7 @@ public class ViewKorisnik extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JButton btnObrisi;
-    private javax.swing.JButton btnUredi;
+    private javax.swing.JButton btnSpremi;
     private javax.swing.ButtonGroup btngVrstaKorisnika;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
